@@ -17,7 +17,7 @@
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="204dp" />
+        tools:layout_editor_absoluteY="168dp" />
 
     <EditText
         android:id="@+id/name_input"
@@ -27,7 +27,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="45dp"
         android:ems="10"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
@@ -48,7 +48,7 @@
         android:inputType="number"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="204dp" />
+        tools:layout_editor_absoluteY="168dp" />
 
     <EditText
         android:id="@+id/weight_input"
@@ -58,7 +58,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="107dp"
         android:ems="10"
         android:hint="@string/lbs_hint"
         android:inputType="number"
@@ -79,14 +79,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636"
+        app:layout_constraintVertical_bias="0.586"
         app:layout_constraintHorizontal_bias="0.511" />
 
     <TextView
-        android:id="@+id/welcome_msg"
+        android:id="@+id/welcome_setup_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="0dp"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -102,7 +102,7 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="405dp" />
+        tools:layout_editor_absoluteY="385dp" />
 
     <TextView
         android:id="@+id/activity_msg"
@@ -114,6 +114,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />
+        app:layout_constraintVertical_bias="0.498" />
 
 </android.support.constraint.ConstraintLayout>
