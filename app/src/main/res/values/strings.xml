@@ -1,3 +1,10 @@
 <resources>
+    <string name="welcome">Welcome to Fitness Friend</string>
     <string name="app_name">Fitness Friend</string>
+    <string name="feet_hint">Feet (ft)</string>
+    <string name="inch_hint">Inch (in)</string>
+    <string name="name_hint">Name</string>
+    <string name="lbs_hint">Weight (lbs)</string>
+    <string name="finish">Finish!</string>
+    <string name="activity">Activity Level</string>
 </resources>
