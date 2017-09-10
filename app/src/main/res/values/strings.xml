@@ -21,4 +21,15 @@
     <string name="food_today">Food Logged Today:</string>
 
 
+    <string name="quantity">Qty</string>
+    <string name="calories">Calories</string>
+    <string name="log_food">Log Food!</string>
+
+    <string name="activity_label">Activity: </string>
+
+    <string name="exercise_name">Exercise Name</string>
+    <string name="duration">Duration</string>
+    <string name="log_activity">Log Activity!</string>
+
+
 </resources>

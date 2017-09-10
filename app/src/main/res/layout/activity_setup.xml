@@ -55,7 +55,7 @@
         android:layout_marginTop="168dp"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="167dp"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_spnr"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_spinner"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="61dp"
         android:layout_marginRight="61dp" />
@@ -78,7 +78,7 @@
         tools:layout_constraintTop_creator="1" />
 
     <Spinner
-        android:id="@+id/activity_spnr"
+        android:id="@+id/activity_spinner"
         android:layout_width="0dp"
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
