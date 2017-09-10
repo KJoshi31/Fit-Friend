@@ -23,7 +23,7 @@
         </activity>
 
         <activity android:name=".exercise_history">
-            
+
         </activity>
 
 

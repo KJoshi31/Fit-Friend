@@ -11,6 +11,6 @@ public class setup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.setup);
+        setContentView(R.layout.activity_setup);
     }
 }

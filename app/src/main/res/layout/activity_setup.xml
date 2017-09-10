@@ -17,16 +17,14 @@
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="168dp" />
+        android:layout_marginEnd="81dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/feet_input"
+        tools:layout_constraintBaseline_creator="1" />
 
     <EditText
         android:id="@+id/name_input"
         android:layout_width="236dp"
         android:layout_height="47dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="45dp"
         android:ems="10"
         android:hint="@string/name_hint"
@@ -47,17 +45,25 @@
         android:hint="@string/feet_hint"
         android:inputType="number"
         android:textAlignment="center"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="168dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/finish_btn"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        app:layout_constraintRight_toRightOf="@+id/activity_msg"
+        android:layout_marginTop="168dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="167dp"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_spnr"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="61dp"
+        android:layout_marginRight="61dp" />
 
     <EditText
         android:id="@+id/weight_input"
         android:layout_width="239dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="107dp"
         android:ems="10"
         android:hint="@string/lbs_hint"
@@ -73,26 +79,33 @@
 
     <Spinner
         android:id="@+id/activity_spnr"
-        android:layout_width="341dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.586"
-        app:layout_constraintHorizontal_bias="0.511" />
+        app:layout_constraintHorizontal_bias="0.511"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="21dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp" />
 
     <TextView
         android:id="@+id/welcome_setup_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <Button
         android:id="@+id/finish_btn"
@@ -102,7 +115,11 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="385dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="55dp" />
 
     <TextView
         android:id="@+id/activity_msg"
@@ -114,6 +131,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintVertical_bias="0.498"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
 </android.support.constraint.ConstraintLayout>

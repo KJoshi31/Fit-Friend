@@ -7,11 +7,11 @@ import android.support.v7.app.AppCompatActivity;
  * Created by karan on 9/9/2017.
  */
 
-public class exercise_history extends AppCompatActivity {
+public class food_history extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle saveInstanceState){
+    protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_exercise_history);
+        setContentView(R.layout.activity_food_history);
     }
 }
