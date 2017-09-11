@@ -33,7 +33,8 @@
 
     <string name="message_reminders_option_label">Message Reminder Options</string>
     <string name="message_options_label">Message Options</string>
-    <string name="send_message_reminds">Send Message Reminders?</string>
+    <string name="send_food_log_reminds">Send Food Logging Reminders?</string>
+    <string name="send_exercise_log_reminders">Send Exercise Logging Reminders?</string>
 
 
 </resources>
