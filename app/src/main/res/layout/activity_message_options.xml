@@ -34,16 +34,27 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="71dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/msg_opt_lbl"
+        tools:layout_constraintLeft_creator="1" />
 
     <ToggleButton
         android:id="@+id/food_log_toggle_btn"
         android:layout_width="170dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:text="ToggleButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="116dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/ex_rmnd_lbl"
+        android:layout_marginTop="45dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintTop_toTopOf="@+id/food_log_rmnd_lbl" />
 
     <TextView
         android:id="@+id/ex_rmnd_lbl"
@@ -53,7 +64,11 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="214dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="214dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
         android:id="@+id/exercise_log_toggle_btn"
@@ -62,6 +77,10 @@
         android:text="ToggleButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="262dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="86dp"
+        app:layout_constraintTop_toBottomOf="@+id/food_log_toggle_btn"
+        tools:layout_constraintLeft_creator="1" />
 
 </android.support.constraint.ConstraintLayout>
