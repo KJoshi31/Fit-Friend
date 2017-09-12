@@ -16,7 +16,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.502" />
+        app:layout_constraintHorizontal_bias="0.502"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/ex_name_input"
@@ -28,7 +30,11 @@
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="70dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/add_ex_lbl"
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/duration_input"
@@ -40,15 +46,28 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="151dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="85dp"
+        app:layout_constraintBottom_toBottomOf="@+id/calorie_input"
+        android:layout_marginTop="81dp"
+        android:layout_marginBottom="82dp"
+        app:layout_constraintTop_toTopOf="@+id/ex_name_input" />
 
     <Spinner
         android:id="@+id/unit_spinner"
         android:layout_width="76dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="16dp"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="151dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="135dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="135dp"
+        app:layout_constraintTop_toTopOf="@+id/add_ex_lbl"
+        app:layout_constraintLeft_toRightOf="@+id/duration_input"
+        android:layout_marginLeft="11dp" />
 
     <EditText
         android:id="@+id/calorie_input"
@@ -62,7 +81,11 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <Button
         android:id="@+id/button"
@@ -71,6 +94,10 @@
         android:text="@string/log_activity"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="327dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="49dp"
+        app:layout_constraintTop_toBottomOf="@+id/calorie_input"
+        tools:layout_constraintLeft_creator="1" />
 
 </android.support.constraint.ConstraintLayout>
