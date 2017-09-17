@@ -37,5 +37,7 @@
     <string name="send_exercise_log_reminders">Send Exercise Logging Reminders?</string>
     <string name="age">Age</string>
 
+    <string name="alphabet_input">"asdfghjklzxcvbnmqwertyuiopASDFGHJKLZXCVBNMQWERTYUIOP "</string>
+
 
 </resources>
