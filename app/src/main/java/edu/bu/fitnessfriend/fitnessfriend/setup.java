@@ -3,6 +3,8 @@ package edu.bu.fitnessfriend.fitnessfriend;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -59,8 +61,34 @@ public class setup extends AppCompatActivity {
                     }
 
                 }
+
+
             }
         });
+
+        feetInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String feetInputString = s.toString().trim();
+                //Log.d("hi",Integer.toString(inchInputString.length()));
+                if(feetInputString.length() == 3){
+
+                    feetInputString = feetInputString.substring(1,feetInputString.length());
+                    feetInput.setText(feetInputString);
+                }
+
+            }
+        });
+
+
 
         //input formatting for the inch input
         //later needs to be refactored into its own method
@@ -74,15 +102,48 @@ public class setup extends AppCompatActivity {
                     inchInputString = inchInputString.substring(0,inchInputString.length()-2);
                     inchInputString = inchInputString.trim();
                     inchInput.setText(inchInputString);
+                    inchInput.setSelection(inchInput.getText().length());
+
                 }else{
                     if(inchInputString.length()>0 && !inchInputString.equals("")){
                         inchInputString = inchInputString.trim() + " in";
                         inchInput.setText(inchInputString.trim());
+                        inchInput.setSelection(inchInput.getText().length());
+
                     }
 
                 }
             }
 
+        });
+
+        inchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String inchInputString = s.toString();
+                //Log.d("hi",Integer.toString(inchInputString.length()));
+                //Log.d("hi",inchInputString);
+
+                if(inchInputString.length() == 3){
+
+                    inchInputString = inchInputString.substring(1,inchInputString.length());
+                    inchInput.setText(inchInputString);
+                }
+
+                if(inchInputString.startsWith("0")){
+                    inchInput.setText("");
+                }
+
+
+            }
         });
 
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -120,13 +181,11 @@ public class setup extends AppCompatActivity {
         weightInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String weightInputString = s.toString();
-
             }
 
             @Override
