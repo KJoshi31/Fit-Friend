@@ -190,25 +190,28 @@ public class setup extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                //get weight input string text
                 String weightInputString = s.toString();
 
+                //if the string is length greater than 0 and starts with 0 or starts with decimal
+                //then remove those characters by doing a substring and then set the text field
                 if(weightInputString.length()>0 &&
                         (weightInputString.startsWith("0") || weightInputString.startsWith(".") ) ){
                     weightInputString = weightInputString.substring(1,weightInputString.length());
                     weightInput.setText(weightInputString);
                 }
-
+                //if the user tries to type 0 or decimal as first characters when empty, make it ""
                 if( weightInputString.startsWith("0") || weightInputString.startsWith(".") ) {
                     weightInput.setText("");
                 }
-
+                //count how many decimals are in the string populated in the field
                 int decimalCounter = 0;
                 for(int i = 0;i<weightInputString.length(); i++){
                     if(weightInputString.toCharArray()[i] == '.'){
                         decimalCounter++;
                     }
                 }
-
+                //if there are more than 2 decimals then remove the second decimal and set the text
                 if(decimalCounter == 2 && weightInputString.contains(".")){
                     weightInputString = weightInputString.substring(0,weightInputString.length()-1);
                     weightInput.setText(weightInputString);
