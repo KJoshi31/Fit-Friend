@@ -111,7 +111,7 @@
         android:ems="10"
         android:hint="@string/inch_hint"
         android:inputType="number"
-        android:digits="123456789"
+        android:digits="1234567890"
         android:textAlignment="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/feet_input"
         android:layout_marginRight="60dp"
