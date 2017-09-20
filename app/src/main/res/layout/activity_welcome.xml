@@ -94,7 +94,7 @@
         android:id="@+id/add_ex_btn"
         android:layout_width="185dp"
         android:layout_height="50dp"
-        android:text="@string/add_exercise"
+        android:text="@string/add_exercise_lbl"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/ex_history_btn"
         app:layout_constraintBaseline_toBaselineOf="@+id/ex_history_btn"
