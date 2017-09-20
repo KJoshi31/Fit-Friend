@@ -20,45 +20,57 @@
     </string-array>
 
 
-    <string name="exercise_history">Exercise History</string>
-    <string name="food_history">Food History</string>
+    <!--These are the strings for the activity_add_exercise.xml file-->
+    <string name="add_exercise_lbl">Add Exercise</string>
+    <string name="exercise_name_lbl">Exercise Name:</string>
+    <string name="calories_lbl">Calories:</string>
+    <string name="duration_lbl">Duration:</string>
+    <string name="log_exercise_btn_lbl">Log Exercise!</string>
 
-    <string name="add_food">Add Food</string>
-    <string name="add_exercise">Add Exercise</string>
-    <string name="welcome_back">Welcome Back (insert name)</string>
-
-    <string name="calories_burnt_label">Calories Burnt Today: </string>
-    <string name="calories_eaten_label">Calories Eaten Today: </string>
-    <string name="exercises_today">Exercises Logged Today: </string>
-    <string name="food_today">Food Logged Today:</string>
-
-
-    <string name="quantity">Qty</string>
-    <string name="calories">Calories</string>
-    <string name="log_food">Log Food!</string>
-
-
-    <string name="exercise_name">Exercise Name</string>
-    <string name="duration">Duration</string>
-    <string name="log_activity">Log Activity!</string>
-
-    <string name="message_reminders_option_label">Message Reminder Options</string>
-    <string name="message_options_label">Message Options</string>
-    <string name="send_food_log_reminds">Send Food Logging Reminders?</string>
-    <string name="send_exercise_log_reminders">Send Exercise Logging Reminders?</string>
-
-
-    <string name="alphabet_input">"asdfghjklzxcvbnmqwertyuiopASDFGHJKLZXCVBNMQWERTYUIOP "</string>
-
-
-
-
+    <!--These are the strings used for the spinner in the activity_add_exercise.xml file-->
     <string-array name="duration_array">
         <item>Unit:</item>
         <item>Sec.</item>
         <item>Min.</item>
         <item>Hour</item>
     </string-array>
+
+
+    <!--These are the strings used for the activity_add_food.xml file-->
+    <string name="add_food_lbl">Add Food</string>
+    <string name="food_name_lbl">Food Name:</string>
+    <string name="quantity_lbl">Qty:</string>
+    <string name="food_calories_lbl">Food Calories:</string>
+    <string name="log_food_btn_lbl">Log Food!</string>
+
+
+
+    <!--These are the labels for the activity_welcome.xml file-->
+    <string name="welcome_back_lbl">Welcome Back (insert name)</string>
+    <string name="calories_eaten_lbl">Calories Eaten Today: </string>
+    <string name="calories_burnt_lbl">Calories Burnt Today: </string>
+    <string name="exercises_logged_today_lbl">Exercises Logged Today: </string>
+    <string name="food_logged_today_lbl">Food Logged Today:</string>
+
+    <!--These are the labels for the buttons on the activity_welcome.xml file-->
+    <string name="add_exercise_btn_lbl">Add Exercise</string>
+    <string name="add_food_btn_lbl">Add Food</string>
+    <string name="exercise_history_btn_lbl">Exercise History</string>
+    <string name="food_history_btn_lbl">Food History</string>
+    <string name="message_reminders_option_btn_lbl">Message Reminder Options</string>
+
+
+
+    <!--These are the labels for the activity_message_options.xml file-->
+    <string name="message_options_lbl">Message Options</string>
+    <string name="food_log_reminders_lbl">Send Food Logging Reminders?</string>
+    <string name="exercise_log_reminders_lbl">Send Exercise Logging Reminders?</string>
+
+
+    <!--These are the utility strings that are used in application-->
+    <string name="alphabet_input">"asdfghjklzxcvbnmqwertyuiopASDFGHJKLZXCVBNMQWERTYUIOP "</string>
+
+
 
 
 </resources>
