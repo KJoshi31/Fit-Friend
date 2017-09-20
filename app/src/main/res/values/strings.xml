@@ -45,30 +45,29 @@
 
 
 
+    <!--These are the labels for the activity_welcome.xml file-->
+    <string name="welcome_back_lbl">Welcome Back (insert name)</string>
+    <string name="calories_eaten_lbl">Calories Eaten Today: </string>
+    <string name="calories_burnt_lbl">Calories Burnt Today: </string>
+    <string name="exercises_logged_today_lbl">Exercises Logged Today: </string>
+    <string name="food_logged_today_lbl">Food Logged Today:</string>
 
-
-    <string name="exercise_history">Exercise History</string>
-    <string name="food_history">Food History</string>
-
-    <string name="welcome_back">Welcome Back (insert name)</string>
-
-    <string name="calories_burnt_label">Calories Burnt Today: </string>
-    <string name="calories_eaten_label">Calories Eaten Today: </string>
-    <string name="exercises_today">Exercises Logged Today: </string>
-    <string name="food_today">Food Logged Today:</string>
-
-
-
-
+    <!--These are the labels for the buttons on the activity_welcome.xml file-->
+    <string name="add_exercise_btn_lbl">Add Exercise</string>
+    <string name="add_food_btn_lbl">Add Food</string>
+    <string name="exercise_history_btn_lbl">Exercise History</string>
+    <string name="food_history_btn_lbl">Food History</string>
+    <string name="message_reminders_option_btn_lbl">Message Reminder Options</string>
 
 
 
-    <string name="message_reminders_option_label">Message Reminder Options</string>
-    <string name="message_options_label">Message Options</string>
-    <string name="send_food_log_reminds">Send Food Logging Reminders?</string>
-    <string name="send_exercise_log_reminders">Send Exercise Logging Reminders?</string>
+    <!--These are the labels for the activity_message_options.xml file-->
+    <string name="message_options_lbl">Message Options</string>
+    <string name="food_log_reminders_lbl">Send Food Logging Reminders?</string>
+    <string name="exercise_log_reminders_lbl">Send Exercise Logging Reminders?</string>
 
 
+    <!--These are the utility strings that are used in application-->
     <string name="alphabet_input">"asdfghjklzxcvbnmqwertyuiopASDFGHJKLZXCVBNMQWERTYUIOP "</string>
 
 
