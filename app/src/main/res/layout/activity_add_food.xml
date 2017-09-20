@@ -75,9 +75,8 @@
                 android:id="@+id/qty_input"
                 android:layout_width="105dp"
                 android:layout_height="45dp"
-                android:digits="1234567890"
                 android:ems="10"
-                android:inputType="numberSigned"
+                android:inputType="numberDecimal"
                 android:textAlignment="center"
                 tools:layout_editor_absoluteX="35dp"
                 tools:layout_editor_absoluteY="206dp" />
@@ -99,7 +98,6 @@
                 android:id="@+id/cal_input"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:digits="1234567890."
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:textAlignment="center"
