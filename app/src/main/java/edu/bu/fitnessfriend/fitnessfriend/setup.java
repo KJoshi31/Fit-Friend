@@ -36,7 +36,7 @@ public class setup extends AppCompatActivity {
 
         //apply the adapter to the activity spinner
         activitySpinner.setAdapter(adapter);
-        
+
 
     }
 }
