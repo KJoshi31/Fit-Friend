@@ -33,7 +33,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="42dp"
         android:ems="10"
-        android:hint="@string/name_hint"
+        android:hint="@string/name_label"
         android:inputType="textPersonName"
         android:digits="@string/alphabet_input"
         android:textAlignment="center"
