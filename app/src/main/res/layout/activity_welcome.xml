@@ -104,7 +104,7 @@
         android:id="@+id/add_food_btn"
         android:layout_width="185dp"
         android:layout_height="50dp"
-        android:text="@string/add_food"
+        android:text="@string/add_food_lbl"
         app:layout_constraintRight_toLeftOf="@+id/food_history_btn"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintBottom_creator="1"
