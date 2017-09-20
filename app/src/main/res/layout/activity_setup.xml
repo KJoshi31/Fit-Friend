@@ -51,7 +51,7 @@
                 android:id="@+id/name_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_hint"
+                android:text="@string/name_label"
                 android:textSize="21sp" />
 
             <EditText
@@ -74,7 +74,7 @@
                 android:id="@+id/weight_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lbs_hint"
+                android:text="@string/lbs_label"
                 android:textSize="21sp" />
 
             <EditText
@@ -116,7 +116,7 @@
                 android:id="@+id/feet_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/feet_hint"
+                android:text="@string/feet_label"
                 android:textAllCaps="false"
                 android:textSize="21sp" />
 
@@ -140,7 +140,7 @@
                 android:id="@+id/inch_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/inch_hint"
+                android:text="@string/inch_label"
                 android:textSize="21sp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
@@ -192,7 +192,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/finish"
+        android:text="@string/finish_btn_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintLeft_toLeftOf="parent"

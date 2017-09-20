@@ -1,13 +1,25 @@
 <resources>
-    <string name="welcome">Welcome to Fitness Friend</string>
     <string name="app_name">Fitness Friend</string>
-    <string name="feet_hint">Feet (ft)</string>
-    <string name="inch_hint">Inch (in)</string>
-    <string name="name_hint">Name</string>
-    <string name="lbs_hint">Weight (lbs)</string>
 
-    <string name="finish">Finish!</string>
-    <string name="activity">Activity Level</string>
+    <!--These are the strings for the activity_setup.xml file-->
+    <string name="welcome">Welcome to Fitness Friend</string>
+    <string name="name_label">Name:</string>
+    <string name="lbs_label">Weight (lbs):</string>
+    <string name="age">Age</string>
+    <string name="feet_label">Feet (ft):</string>
+    <string name="inch_label">Inch (in):</string>
+    <string name="activity_label">Activity: </string>
+    <string name="finish_btn_label">Finish!</string>
+
+    <!--These are the strings used for the spinner in the activity_setup.xml file-->
+    <string-array name="activity_level_array">
+        <item>Choose Activity Level:</item>
+        <item>Lightly Active - exercise 1-3 times/week</item>
+        <item>Moderately Active - exercise 3-5 times/week</item>
+        <item>Very Active - exercise 6-7 times/week</item>
+    </string-array>
+
+
     <string name="exercise_history">Exercise History</string>
     <string name="food_history">Food History</string>
 
@@ -25,7 +37,6 @@
     <string name="calories">Calories</string>
     <string name="log_food">Log Food!</string>
 
-    <string name="activity_label">Activity: </string>
 
     <string name="exercise_name">Exercise Name</string>
     <string name="duration">Duration</string>
@@ -35,17 +46,12 @@
     <string name="message_options_label">Message Options</string>
     <string name="send_food_log_reminds">Send Food Logging Reminders?</string>
     <string name="send_exercise_log_reminders">Send Exercise Logging Reminders?</string>
-    <string name="age">Age</string>
+
 
     <string name="alphabet_input">"asdfghjklzxcvbnmqwertyuiopASDFGHJKLZXCVBNMQWERTYUIOP "</string>
 
 
-    <string-array name="activity_level_array">
-        <item>Choose Activity Level:</item>
-        <item>Lightly Active - exercise 1-3 times/week</item>
-        <item>Moderately Active - exercise 3-5 times/week</item>
-        <item>Very Active - exercise 6-7 times/week</item>
-    </string-array>
+
 
     <string-array name="duration_array">
         <item>Unit:</item>
