@@ -46,7 +46,7 @@
                 android:textSize="21sp" />
 
             <EditText
-                android:id="@+id/name_input"
+                android:id="@+id/food_name_input"
                 android:layout_width="221dp"
                 android:layout_height="51dp"
                 android:digits="@string/alphabet_input"
@@ -95,7 +95,7 @@
                 android:textSize="21sp" />
 
             <EditText
-                android:id="@+id/cal_input"
+                android:id="@+id/food_cal_input"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:ems="10"
