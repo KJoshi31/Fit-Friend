@@ -27,6 +27,7 @@ public class add_food extends AppCompatActivity{
         setContentView(R.layout.activity_add_food);
 
         Button logFoodButton = (Button) findViewById(R.id.add_food_btn);
+        logFoodButton.setEnabled(false);
         EditText foodNameField = (EditText) findViewById(R.id.food_name_input);
         EditText qtyField = (EditText) findViewById(R.id.qty_input);
         EditText foodCaloriesField = (EditText) findViewById(R.id.food_cal_input);
