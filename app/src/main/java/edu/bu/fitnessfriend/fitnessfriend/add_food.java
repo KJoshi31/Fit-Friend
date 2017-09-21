@@ -37,8 +37,6 @@ public class add_food extends AppCompatActivity{
         addFoodInputs.add(foodCaloriesField);
 
         for(int i = 0; i<addFoodInputs.size(); i++){
-            String a = Integer.toString(i);
-            Log.d("hi",a);
             addFoodInputs.get(i).addTextChangedListener(textWatcher);
         }
         
