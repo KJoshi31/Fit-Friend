@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 public class add_food extends AppCompatActivity{
 
-    private static ArrayList<EditText> addFoodInputs = new ArrayList<>();
+    private ArrayList<EditText> addFoodInputs = new ArrayList<>();
+    private button_validation_utility btnUtility = new button_validation_utility();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,6 @@ public class add_food extends AppCompatActivity{
         EditText qtyField = (EditText) findViewById(R.id.qty_input);
         EditText foodCaloriesField = (EditText) findViewById(R.id.food_cal_input);
 
-        logFoodButton.setEnabled(false);
 
         addFoodInputs.add(foodNameField);
         addFoodInputs.add(qtyField);
@@ -41,6 +41,7 @@ public class add_food extends AppCompatActivity{
             Log.d("hi",a);
             addFoodInputs.get(i).addTextChangedListener(textWatcher);
         }
+        
 
     }
 
@@ -52,9 +53,9 @@ public class add_food extends AppCompatActivity{
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            boolean enableButton = inputsFilled(addFoodInputs);
+            boolean enableButton = btnUtility.inputsFilled(addFoodInputs);
             Button logFoodButton = (Button)findViewById(R.id.add_food_btn);
-            enableAddButton(logFoodButton, enableButton);
+            btnUtility.enableAddButton(logFoodButton, enableButton);
         }
 
         @Override
@@ -62,31 +63,6 @@ public class add_food extends AppCompatActivity{
 
         }
     };
-
-
-    public boolean inputsFilled(ArrayList<EditText> inputFields) {
-        boolean isEmpty = false;
-
-
-        for(int i = 0; i<inputFields.size(); i++) {
-            if(inputFields.get(i).getText().toString().trim().equals("")||
-                    inputFields.get(i).getText().toString().length()==0){
-                isEmpty = true;
-                break;
-            }
-        }
-
-        return isEmpty;
-
-    }
-
-    public void enableAddButton(Button button, Boolean setter){
-        if (setter) {
-            button.setEnabled(false);
-        } else {
-            button.setEnabled(true);
-        }
-    }
 
 
 }
