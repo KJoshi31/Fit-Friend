@@ -2,6 +2,7 @@ package edu.bu.fitnessfriend.fitnessfriend;
 
 import android.os.Bundle;
 import android.support.annotation.BoolRes;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -62,6 +63,12 @@ public class add_food extends AppCompatActivity{
 
         }
     };
+
+    protected void logFood(View view){
+        Snackbar logFoodSnackbar = Snackbar.make(findViewById(R.id.addFood), "Food Logged", 0);
+        btnUtility.clearInputs(addFoodInputs);
+        logFoodSnackbar.show();
+    }
 
 
 }

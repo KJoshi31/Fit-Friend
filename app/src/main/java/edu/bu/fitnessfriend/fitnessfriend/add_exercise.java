@@ -2,6 +2,7 @@ package edu.bu.fitnessfriend.fitnessfriend;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -104,5 +105,18 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
             logExerciseButton.setEnabled(false);
         }
         
+    }
+
+    public void logExercise(View view){
+
+        Spinner unitSpinner = (Spinner) findViewById(R.id.duration_spinner);
+
+        Snackbar logExerciseSnackbar =
+                Snackbar.make(findViewById(R.id.addExercise),"Exercise Logged", 0);
+        btnUtility.clearInputs(addExerciseInputs);
+
+        unitSpinner.setSelection(0);
+
+        logExerciseSnackbar.show();
     }
 }
