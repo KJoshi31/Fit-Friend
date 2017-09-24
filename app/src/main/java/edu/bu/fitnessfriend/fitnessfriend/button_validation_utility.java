@@ -56,6 +56,12 @@ public class button_validation_utility {
         }
     }
 
+    public void clearInputs(ArrayList<EditText> textFields){
+        for(int i = 0; i<textFields.size(); i++){
+            textFields.get(i).setText("");
+        }
+    }
+
 
 
 }

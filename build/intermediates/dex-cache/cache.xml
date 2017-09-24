@@ -2,121 +2,22 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\eaded43058d7f8c7436b14f19553220022242050\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_c59ea566c4429cfcb9c6cb8f4510fd7b3114d80f.jar" />
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6b967d5d1512a618069349d975d1e52e8f3933f7\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\3ace69c396e233f002adc109502bee7b94628bb9\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_885f4fe102774781a68900ba236dce2d7d2a80fc.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\6453da330bc404427ba3e07293664168ff4e5205\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_d5585ef1959d8be1b6cc00f7ecc2841d5efec215.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\4216055044e3fd5e3edf9ed096dec5ad4d78528e\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_e09e4b29791a0f20dd440e6f8e838990ddd8817f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_2774930c5137d5b70191f9ed8250bce561042580.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\3705f68e26c280537ffab9b92a25f1bfeaf4629c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_45da9aaac365409b1bb9cd2c27a65016e56df29c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\9382a4b6baa23bdde5617faa55d7b10d02210e3c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_6ec4817e03b0808ab3e7d64d174febe24328ea32.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\7460f344a2fa9adf76d1a438e2054a374e541fc9\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_0848ebc934f401578c5e86848da6962382249ecb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\9be9c1ade32ef17f598a8ae917fe2a9096dccc96\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_294a65c33c8122d044e5be1dfdbe939221a7a591.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\8fac5caa981f53dcc533ef62baff5829dc4db263\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_946c430ecd04e0993555a50023652ae094a472d2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\2e360702b128867ed9ff7200bdd8ea08473abb90\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_04c0f23362e55754859b9b45c7fbd9dc820a7e69.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\c2616594b901f5e14d14c79f995c7177ae9892be\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_15b5b6831575941278b3828c5f15500a6aa90af9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Karan\.android\build-cache\c33f9ceb17d48e2ba40cb9a01210f75dd4440983\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="C:\Users\Karan\Documents\Programming\Fit-Friend\app\build\intermediates\pre-dexed\debug\classes_8eb6e0bf3b990c7a2d3917f2bd6f9698ec90b733.jar" />
+        sha1="72dfcc5a6a3dc9848475b3a589e81922ffb8bde0">
+        <dex dex="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_94f7c7af6af9eb5e713feae05dc7f4fbfab29eb4\classes.dex" />
     </item>
 
 </items>
