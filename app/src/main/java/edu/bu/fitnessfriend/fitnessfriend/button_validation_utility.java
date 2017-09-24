@@ -1,7 +1,9 @@
 package edu.bu.fitnessfriend.fitnessfriend;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -11,30 +13,49 @@ import java.util.ArrayList;
 
 public class button_validation_utility {
 
+    public boolean spinnerSwitch = false;
 
     public boolean inputsFilled(ArrayList<EditText> inputFields) {
-        boolean isEmpty = false;
+        boolean allFieldsEmpty = true;
 
 
         for(int i = 0; i<inputFields.size(); i++) {
             if(inputFields.get(i).getText().toString().trim().equals("")||
                     inputFields.get(i).getText().toString().length()==0){
-                isEmpty = true;
+                allFieldsEmpty = false;
                 break;
             }
         }
 
-        return isEmpty;
+        return allFieldsEmpty;
+
+    }
+
+    public boolean inputsFilled(ArrayList<EditText> inputFields, Spinner spinner) {
+
+        boolean allFieldsEmpty = true;
+
+
+        for(int i = 0; i<inputFields.size(); i++) {
+            if(inputFields.get(i).getText().toString().trim().equals("")||
+                    inputFields.get(i).getText().toString().length()==0){
+                allFieldsEmpty = false;
+                break;
+            }
+        }
+
+        return allFieldsEmpty;
 
     }
 
     public void enableAddButton(Button button, Boolean setter){
-        if (setter) {
+        if (setter == false) {
             button.setEnabled(false);
         } else {
             button.setEnabled(true);
         }
     }
+
 
 
 }
