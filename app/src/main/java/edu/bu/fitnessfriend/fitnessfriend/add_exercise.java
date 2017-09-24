@@ -46,17 +46,13 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
 
         //find spinner
         Spinner durationSpinner = (Spinner) findViewById(R.id.duration_spinner);
-
         //create adapter that stores the duration array string as a simple spinner item
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.duration_array,android.R.layout.simple_spinner_item);
-
         //displays item in the adapter as a simple spinner drop down item
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         //apply the adapter to the spinner
         durationSpinner.setAdapter(adapter);
-
         durationSpinner.setOnItemSelectedListener(this);
 
 
@@ -64,8 +60,7 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             Button logExerciseButton =(Button) findViewById(R.id.add_ex_btn);
@@ -73,7 +68,13 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
 
             textInputsFilled = btnUtility.inputsFilled(addExerciseInputs, unitSpinner);
 
-            btnUtility.enableAddButton(logExerciseButton,textInputsFilled);
+            String selectedItem = unitSpinner.getSelectedItem().toString().trim();
+
+            if(textInputsFilled && !selectedItem.equals("Unit:") ){
+                logExerciseButton.setEnabled(true);
+            }else{
+                logExerciseButton.setEnabled(false);
+            }
         }
         @Override
         public void afterTextChanged(Editable s) {}
@@ -82,11 +83,26 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       
+        Button logExerciseButton =(Button) findViewById(R.id.add_ex_btn);
+
+        if(position!=0 && textInputsFilled == true){
+            logExerciseButton.setEnabled(true);
+        }else{
+            logExerciseButton.setEnabled(false);
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        Button logExerciseButton = (Button) findViewById(R.id.add_ex_btn);
+        String selectedItem = parent.getSelectedItem().toString().trim();
 
+
+        if(textInputsFilled && !selectedItem.equals("Unit:") ){
+            logExerciseButton.setEnabled(true);
+        }else{
+            logExerciseButton.setEnabled(false);
+        }
+        
     }
 }

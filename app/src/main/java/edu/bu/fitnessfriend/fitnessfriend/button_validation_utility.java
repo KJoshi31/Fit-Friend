@@ -16,40 +16,40 @@ public class button_validation_utility {
     public boolean spinnerSwitch = false;
 
     public boolean inputsFilled(ArrayList<EditText> inputFields) {
-        boolean fieldEmpty = false;
+        boolean allFieldsEmpty = true;
 
 
         for(int i = 0; i<inputFields.size(); i++) {
             if(inputFields.get(i).getText().toString().trim().equals("")||
                     inputFields.get(i).getText().toString().length()==0){
-                fieldEmpty = true;
+                allFieldsEmpty = false;
                 break;
             }
         }
 
-        return fieldEmpty;
+        return allFieldsEmpty;
 
     }
 
     public boolean inputsFilled(ArrayList<EditText> inputFields, Spinner spinner) {
 
-        boolean fieldsEmpty = false;
+        boolean allFieldsEmpty = true;
+
+
         for(int i = 0; i<inputFields.size(); i++) {
-            if( (inputFields.get(i).getText().toString().trim().equals("") )  ||
-                    (inputFields.get(i).getText().toString().length()==0)){
-                fieldsEmpty = true;
+            if(inputFields.get(i).getText().toString().trim().equals("")||
+                    inputFields.get(i).getText().toString().length()==0){
+                allFieldsEmpty = false;
                 break;
             }
         }
-        Log.d("spinner inputsfilled():", Boolean.toString(spinnerSwitch));
-        Log.d("isEmpty inputsfilled():", Boolean.toString(fieldsEmpty));
 
-        return fieldsEmpty;
+        return allFieldsEmpty;
 
     }
 
     public void enableAddButton(Button button, Boolean setter){
-        if (setter) {
+        if (setter == false) {
             button.setEnabled(false);
         } else {
             button.setEnabled(true);
