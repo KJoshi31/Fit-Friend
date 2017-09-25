@@ -51,17 +51,20 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //create food table for the database
         String CREATE_FOOD_TABLE = "CREATE TABLE "+foodDB.TABLE_FOOD+
                 "("+foodDB.FOOD_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 foodDB.FOOD_NAME + " TEXT, "+ foodDB.FOOD_QTY+" REAL, "+
                 foodDB.FOOD_CAL+ " REAL, " + foodDB.FOOD_DATE + " TEXT "+")";
 
+        //create exercise table for the database
         String CREATE_EXERCISE_TABLE = "CREATE TABLE "+exerciseDB.TABLE_EXERCISE+
                 "("+exerciseDB.EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 exerciseDB.EXERCISE_NAME + " TEXT, " + exerciseDB.EXERCISE_CAL + " REAL, "+
                 exerciseDB.EXERCISE_DURATION + " REAL, "+ exerciseDB.EXERCISE_UNIT + " TEXT, "+
                 exerciseDB.EXERCISE_DATE + " TEXT "+")";
 
+        //create demographics table for the database
         String CREATE_DEMOGRAPHIC_TABLE = "CREATE TABLE "+demographicDB.TABLE_DEMOGRAPH+
                 "("+demographicDB.DEMOGRAPHIC_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 demographicDB.DEMOGRAPHIC_NAME+ " TEXT, "+ demographicDB.DEMOGRAPHIC_WEIGHT +

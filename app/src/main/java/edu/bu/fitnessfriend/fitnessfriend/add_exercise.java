@@ -108,15 +108,16 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void logExercise(View view){
-
+        //get spinner on page
         Spinner unitSpinner = (Spinner) findViewById(R.id.duration_spinner);
-
+        //create spinner to display
         Snackbar logExerciseSnackbar =
                 Snackbar.make(findViewById(R.id.addExercise),"Exercise Logged", 0);
+        //clear all the arraylist full of inputs that are on the page
         btnUtility.clearInputs(addExerciseInputs);
-
+        //set the selection to the default 
         unitSpinner.setSelection(0);
-
+        //show the snackbar
         logExerciseSnackbar.show();
     }
 }

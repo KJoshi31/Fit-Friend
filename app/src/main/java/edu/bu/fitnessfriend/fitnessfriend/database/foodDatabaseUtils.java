@@ -21,10 +21,10 @@ public class foodDatabaseUtils {
         _handler = handler;
     }
 
+    //method used to insert food entries into the food table of database
     public void insertFood(food foodItem){
 
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
 
         ContentValues values = new ContentValues();
         values.put(foodDatabase.FOOD_NAME,foodItem.getFoodName());
