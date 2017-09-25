@@ -33,6 +33,17 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String EXERCISE_DATE = "exercise_log_date";
     }
 
+    private class demographicDB{
+        public static final String TABLE_DEMOGRAPH = "demographics";
+        public static final String DEMOGRAPHIC_ID = "id";
+        public static final String DEMOGRAPHIC_NAME = "name";
+        public static final String DEMOGRAPHIC_WEIGHT = "weight";
+        public static final String DEMOGRAPHIC_AGE = "age";
+        public static final String DEMOGRAPHIC_FEET = "feet";
+        public static final String DEMOGRAPHIC_INCH = "inch";
+        public static final String DEMOGRAPHIC_ACTIVITY_LVL = "activity_level";
+    }
+
     public myDatabaseHandler(Context context, String name ,
                              SQLiteDatabase.CursorFactory factory, int version){
         super(context,DB_NAME,factory, DB_VERSION);
@@ -51,6 +62,14 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
                 exerciseDB.EXERCISE_DURATION + " REAL, "+ exerciseDB.EXERCISE_UNIT + " TEXT, "+
                 exerciseDB.EXERCISE_DATE + " TEXT "+")";
 
+        String CREATE_DEMOGRAPHIC_TABLE = "CREATE TABLE "+demographicDB.TABLE_DEMOGRAPH+
+                "("+demographicDB.DEMOGRAPHIC_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                demographicDB.DEMOGRAPHIC_NAME+ " TEXT, "+ demographicDB.DEMOGRAPHIC_WEIGHT +
+                " INTEGER, " + demographicDB.DEMOGRAPHIC_AGE + "INTEGER, "+demographicDB.DEMOGRAPHIC_FEET+
+                " INTEGER, "+ demographicDB.DEMOGRAPHIC_INCH + " INTEGER, "+ demographicDB.DEMOGRAPHIC_ACTIVITY_LVL+
+                " TEXT "+")";
+
+        db.execSQL(CREATE_DEMOGRAPHIC_TABLE);
         db.execSQL(CREATE_FOOD_TABLE);
         db.execSQL(CREATE_EXERCISE_TABLE);
 
@@ -58,6 +77,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+demographicDB.TABLE_DEMOGRAPH);
         db.execSQL("DROP TABLE IF EXISTS "+foodDB.TABLE_FOOD);
         db.execSQL("DROP TABLE IF EXISTS "+exerciseDB.TABLE_EXERCISE);
         onCreate(db);
