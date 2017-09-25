@@ -35,7 +35,7 @@ public class foodDB {
         SQLiteDatabase db = _handler.getWritableDatabase();
 
         db.insert(foodDatabase.TABLE_FOOD,null, values);
-
+        db.close();
     }
 
 }
