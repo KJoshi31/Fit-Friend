@@ -14,7 +14,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
     public static final String DB_NAME = "FitnessFriend.db";
 
 
-    private class foodDB{
+    protected class foodDB{
         public static final String TABLE_FOOD = "foods";
         public static final String FOOD_ID = "id";
         public static final String FOOD_NAME = "food_name";
@@ -23,7 +23,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String FOOD_DATE = "food_log_date";
     }
 
-    private class exerciseDB{
+    protected class exerciseDB{
         public static final String TABLE_EXERCISE = "exercises";
         public static final String EXERCISE_ID = "id";
         public static final String EXERCISE_NAME = "exercise_name";
@@ -33,7 +33,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String EXERCISE_DATE = "exercise_log_date";
     }
 
-    private class demographicDB{
+    protected class demographicDB{
         public static final String TABLE_DEMOGRAPH = "demographics";
         public static final String DEMOGRAPHIC_ID = "id";
         public static final String DEMOGRAPHIC_NAME = "name";
@@ -51,17 +51,20 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //create food table for the database
         String CREATE_FOOD_TABLE = "CREATE TABLE "+foodDB.TABLE_FOOD+
                 "("+foodDB.FOOD_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 foodDB.FOOD_NAME + " TEXT, "+ foodDB.FOOD_QTY+" REAL, "+
                 foodDB.FOOD_CAL+ " REAL, " + foodDB.FOOD_DATE + " TEXT "+")";
 
+        //create exercise table for the database
         String CREATE_EXERCISE_TABLE = "CREATE TABLE "+exerciseDB.TABLE_EXERCISE+
                 "("+exerciseDB.EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 exerciseDB.EXERCISE_NAME + " TEXT, " + exerciseDB.EXERCISE_CAL + " REAL, "+
                 exerciseDB.EXERCISE_DURATION + " REAL, "+ exerciseDB.EXERCISE_UNIT + " TEXT, "+
                 exerciseDB.EXERCISE_DATE + " TEXT "+")";
 
+        //create demographics table for the database
         String CREATE_DEMOGRAPHIC_TABLE = "CREATE TABLE "+demographicDB.TABLE_DEMOGRAPH+
                 "("+demographicDB.DEMOGRAPHIC_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 demographicDB.DEMOGRAPHIC_NAME+ " TEXT, "+ demographicDB.DEMOGRAPHIC_WEIGHT +
