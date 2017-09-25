@@ -12,12 +12,12 @@ import edu.bu.fitnessfriend.fitnessfriend.model.exercise;
  * Created by karan on 9/24/2017.
  */
 
-public class exerciseDB {
+public class exerciseDatabaseUtils {
 
     private myDatabaseHandler.exerciseDB exerciseDatabase = null;
     private myDatabaseHandler _handler;
 
-    public exerciseDB(myDatabaseHandler handler){
+    public exerciseDatabaseUtils(myDatabaseHandler handler){
         _handler = handler;
     }
 

@@ -12,12 +12,12 @@ import edu.bu.fitnessfriend.fitnessfriend.model.food;
  * Created by karan on 9/24/2017.
  */
 
-public class foodDB {
+public class foodDatabaseUtils {
 
     private myDatabaseHandler.foodDB foodDatabase = null;
     private myDatabaseHandler _handler;
 
-    public foodDB(myDatabaseHandler handler){
+    public foodDatabaseUtils(myDatabaseHandler handler){
         _handler = handler;
     }
 
