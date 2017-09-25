@@ -115,7 +115,7 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
                 Snackbar.make(findViewById(R.id.addExercise),"Exercise Logged", 0);
         //clear all the arraylist full of inputs that are on the page
         btnUtility.clearInputs(addExerciseInputs);
-        //set the selection to the default 
+        //set the selection to the default
         unitSpinner.setSelection(0);
         //show the snackbar
         logExerciseSnackbar.show();
