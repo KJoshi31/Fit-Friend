@@ -14,7 +14,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
     public static final String DB_NAME = "FitnessFriend.db";
 
 
-    private class foodDB{
+    protected class foodDB{
         public static final String TABLE_FOOD = "foods";
         public static final String FOOD_ID = "id";
         public static final String FOOD_NAME = "food_name";
@@ -23,7 +23,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String FOOD_DATE = "food_log_date";
     }
 
-    private class exerciseDB{
+    protected class exerciseDB{
         public static final String TABLE_EXERCISE = "exercises";
         public static final String EXERCISE_ID = "id";
         public static final String EXERCISE_NAME = "exercise_name";
@@ -33,7 +33,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String EXERCISE_DATE = "exercise_log_date";
     }
 
-    private class demographicDB{
+    protected class demographicDB{
         public static final String TABLE_DEMOGRAPH = "demographics";
         public static final String DEMOGRAPHIC_ID = "id";
         public static final String DEMOGRAPHIC_NAME = "name";
