@@ -32,6 +32,7 @@ public class exerciseDatabaseUtils {
         values.put(exerciseDatabase.EXERCISE_DATE, currentDateTimeString);
 
         SQLiteDatabase db = _handler.getWritableDatabase();
+        db.insert(exerciseDatabase.TABLE_EXERCISE,null,values);
         db.close();
     }
 }
