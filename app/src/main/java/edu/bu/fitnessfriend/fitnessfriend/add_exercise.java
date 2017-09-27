@@ -16,6 +16,10 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.model.exercise;
+
 /**
  * Created by karan on 9/9/2017.
  */
@@ -108,6 +112,28 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void logExercise(View view){
+        exercise exerciseObj = new exercise();
+
+        EditText exerciseNameField = (EditText) findViewById(R.id.ex_name_input);
+        EditText exerciseCaloriesField = (EditText) findViewById(R.id.ex_calorie_input);
+        EditText durationField = (EditText) findViewById(R.id.duration_input);
+        Spinner durationSpinner = (Spinner) findViewById(R.id.duration_spinner);
+
+        String exName = exerciseNameField.getText().toString().trim();
+        double exCalorie = Double.parseDouble(exerciseCaloriesField.getText().toString().trim());
+        double exDuration = Double.parseDouble(durationField.getText().toString().trim());
+        String exUnit = durationSpinner.getSelectedItem().toString().trim();
+
+        exerciseObj.setExerciseName(exName);
+        exerciseObj.setCalorie(exCalorie);
+        exerciseObj.setDuration(exDuration);
+        exerciseObj.setUnit(exUnit);
+
+        myDatabaseHandler handler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+        exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(handler);
+        exerciseDatabaseUtils.insertExercise(exerciseObj);
+
+
         //get spinner on page
         Spinner unitSpinner = (Spinner) findViewById(R.id.duration_spinner);
         //create spinner to display
