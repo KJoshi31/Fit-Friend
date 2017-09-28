@@ -1,6 +1,8 @@
 package edu.bu.fitnessfriend.fitnessfriend;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,21 @@ public class welcome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences("pref",context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putBoolean("registered",true);
+        editor.commit();
+        boolean alreadyRegistered = sharedPref.getBoolean("registered",true);
+
+        if(alreadyRegistered == false){
+            Intent intent = new Intent(this, setup.class);
+            startActivity(intent);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
     }
@@ -48,4 +65,17 @@ public class welcome extends AppCompatActivity {
         Intent messageReminderOptionsIntent = new Intent(this, message_options.class );
         startActivity(messageReminderOptionsIntent);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setContentView(R.layout.activity_welcome);
+    }
+
+    @Override
+    public void onBackPressed(){
+        moveTaskToBack(true);
+    }
+
+
 }

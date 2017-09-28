@@ -1,5 +1,8 @@
 package edu.bu.fitnessfriend.fitnessfriend;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -28,6 +31,9 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
+
+        alreadyRegistered();
+
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_setup);
 
@@ -92,6 +98,32 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void finishSetup(View view){
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences("pref", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("registered",true);
+        editor.commit();
+
+
+        Intent welcomeIntent = new Intent(this, welcome.class);
+        startActivity(welcomeIntent);
+    }
+
+    public void alreadyRegistered(){
+        Context context = getApplicationContext();
+        SharedPreferences sharedPref = context.getSharedPreferences("pref",context.MODE_PRIVATE);
+
+        boolean alreadyRegistered = sharedPref.getBoolean("registered",false);
+
+        if(alreadyRegistered){
+            Intent i = new Intent(this, welcome.class);
+            startActivity(i);
+        }
+
 
     }
 
