@@ -21,7 +21,7 @@ public class demographicDatabaseUtils {
         _handler = handler;
     }
 
-    public void insertFood(demographic demo){
+    public void insertDemoInfo(demographic demo){
 
 
         ContentValues values = new ContentValues();
