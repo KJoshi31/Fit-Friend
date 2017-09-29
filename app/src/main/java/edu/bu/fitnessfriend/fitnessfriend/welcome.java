@@ -8,9 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Date;
+
+import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
 public class welcome extends AppCompatActivity {
 
@@ -30,9 +34,13 @@ public class welcome extends AppCompatActivity {
             startActivity(intent);
         }
 
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_welcome);
+
+        displayName();
+
+
     }
 
 
@@ -70,6 +78,9 @@ public class welcome extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         setContentView(R.layout.activity_welcome);
+        displayName();
+
+
     }
 
     @Override
@@ -77,5 +88,14 @@ public class welcome extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    public void displayName(){
+        myDatabaseHandler dbHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+        demographicDatabaseUtils demoUtils = new demographicDatabaseUtils(dbHandler);
+
+        String userName = demoUtils.getNameInfo();
+        Log.d("username", userName);
+        TextView welcomeDisplay = (TextView) findViewById(R.id.welcom_back_lbl);
+        welcomeDisplay.setText("Welcome "+ userName);
+    }
 
 }
