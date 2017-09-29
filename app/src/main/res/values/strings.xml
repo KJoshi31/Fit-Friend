@@ -46,7 +46,7 @@
 
 
     <!--These are the labels for the activity_welcome.xml file-->
-    <string name="welcome_back_lbl">Welcome Back (insert name)</string>
+    <string name="welcome_back_lbl">Welcome (insert name)</string>
     <string name="calories_eaten_lbl">Calories Eaten Today: </string>
     <string name="calories_burnt_lbl">Calories Burnt Today: </string>
     <string name="exercises_logged_today_lbl">Exercises Logged Today: </string>

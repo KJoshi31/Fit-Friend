@@ -1,6 +1,8 @@
 package edu.bu.fitnessfriend.fitnessfriend.database;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.DateFormat;
@@ -22,8 +24,6 @@ public class demographicDatabaseUtils {
     }
 
     public void insertDemoInfo(demographic demo){
-
-
         ContentValues values = new ContentValues();
         values.put(demographicDatabase.DEMOGRAPHIC_NAME,demo.getName());
         values.put(demographicDatabase.DEMOGRAPHIC_WEIGHT, demo.getWeight());
@@ -37,5 +37,22 @@ public class demographicDatabaseUtils {
 
         db.insert(demographicDatabase.TABLE_DEMOGRAPH,null, values);
         db.close();
+    }
+
+    public String getNameInfo(){
+        Cursor cursor = null;
+        String userName = "";
+
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from demographics",null);
+
+        cursor.moveToFirst();
+
+        userName = cursor.getString( cursor.getColumnIndex("name")).trim();
+
+        cursor.close();
+
+        return userName;
     }
 }
