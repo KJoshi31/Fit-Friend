@@ -75,7 +75,7 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
 
         //apply the adapter to the activity spinner
         activitySpinner.setAdapter(adapter);
-
+        activitySpinner.setOnItemSelectedListener(this);
 
 
     }
@@ -86,9 +86,20 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            boolean enableButton = btnUtility.inputsFilled(setupInputs);
             Button finishBtn = (Button) findViewById(R.id.finish_setup_btn);
-            btnUtility.enableAddButton(finishBtn, enableButton);
+            Spinner activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
+
+            textInputsFilled = btnUtility.inputsFilled(setupInputs);
+
+            String selectedItem = activitySpinner.getSelectedItem().toString().trim();
+
+            if(textInputsFilled && !selectedItem.equals("Choose Activity Level:")){
+                finishBtn.setEnabled(true);
+            }else{
+                finishBtn.setEnabled(false);
+            }
+
+
         }
 
         @Override
@@ -97,12 +108,26 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Button finishBtn = (Button) findViewById(R.id.finish_setup_btn);
+
+        if(position!= 0 && textInputsFilled == true){
+            finishBtn.setEnabled(true);
+        }else{
+            finishBtn.setEnabled(false);
+        }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        Button finishBtn = (Button) findViewById(R.id.finish_setup_btn);
+        String selectedItem = parent.getSelectedItem().toString().trim();
 
+        if(textInputsFilled && !selectedItem.equals("Choose Activity Level:")){
+            finishBtn.setEnabled(true);
+        }else{
+            finishBtn.setEnabled(false);
+        }
     }
 
     public void finishSetup(View view){
@@ -136,6 +161,7 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
         EditText ageInput = (EditText) findViewById(R.id.age_input);
         EditText feetInput = (EditText) findViewById(R.id.feet_input);
         EditText inchInput = (EditText) findViewById(R.id.inch_input);
+        Spinner activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
 
         demographic demographicObj = new demographic();
         demographicObj.setName(nameInput.getText().toString().trim());
@@ -143,7 +169,7 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
         demographicObj.setAge(Integer.parseInt(ageInput.getText().toString().trim()));
         demographicObj.setFeet(Integer.parseInt(feetInput.getText().toString().trim()));
         demographicObj.setInch(Integer.parseInt(inchInput.getText().toString().trim()));
-        demographicObj.setActivitylvl("TEST-TEST-TEST");
+        demographicObj.setActivitylvl(activitySpinner.getSelectedItem().toString().trim());
         
 
         myDatabaseHandler dbHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
