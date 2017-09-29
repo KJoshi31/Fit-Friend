@@ -68,7 +68,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         String CREATE_DEMOGRAPHIC_TABLE = "CREATE TABLE "+demographicDB.TABLE_DEMOGRAPH+
                 "("+demographicDB.DEMOGRAPHIC_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 demographicDB.DEMOGRAPHIC_NAME+ " TEXT, "+ demographicDB.DEMOGRAPHIC_WEIGHT +
-                " INTEGER, " + demographicDB.DEMOGRAPHIC_AGE + "INTEGER, "+demographicDB.DEMOGRAPHIC_FEET+
+                " INTEGER, " + demographicDB.DEMOGRAPHIC_AGE + " INTEGER, "+demographicDB.DEMOGRAPHIC_FEET+
                 " INTEGER, "+ demographicDB.DEMOGRAPHIC_INCH + " INTEGER, "+ demographicDB.DEMOGRAPHIC_ACTIVITY_LVL+
                 " TEXT "+")";
 

@@ -19,6 +19,10 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.model.demographic;
+
 /**
  * Created by karan on 9/9/2017.
  */
@@ -108,6 +112,7 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
         editor.putBoolean("registered",true);
         editor.commit();
 
+        databaseOperation();
 
         Intent welcomeIntent = new Intent(this, welcome.class);
         startActivity(welcomeIntent);
@@ -123,8 +128,27 @@ public class setup extends AppCompatActivity implements AdapterView.OnItemSelect
             Intent i = new Intent(this, welcome.class);
             startActivity(i);
         }
+    }
 
+    protected void databaseOperation(){
+        EditText nameInput = (EditText) findViewById(R.id.name_input);
+        EditText weightInput = (EditText) findViewById(R.id.weight_input);
+        EditText ageInput = (EditText) findViewById(R.id.age_input);
+        EditText feetInput = (EditText) findViewById(R.id.feet_input);
+        EditText inchInput = (EditText) findViewById(R.id.inch_input);
 
+        demographic demographicObj = new demographic();
+        demographicObj.setName(nameInput.getText().toString().trim());
+        demographicObj.setWeight(Integer.parseInt(weightInput.getText().toString().trim()));
+        demographicObj.setAge(Integer.parseInt(ageInput.getText().toString().trim()));
+        demographicObj.setFeet(Integer.parseInt(feetInput.getText().toString().trim()));
+        demographicObj.setInch(Integer.parseInt(inchInput.getText().toString().trim()));
+        demographicObj.setActivitylvl("TEST-TEST-TEST");
+        
+
+        myDatabaseHandler dbHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+        demographicDatabaseUtils demoUtils = new demographicDatabaseUtils(dbHandler);
+        demoUtils.insertDemoInfo(demographicObj);
     }
 
 
