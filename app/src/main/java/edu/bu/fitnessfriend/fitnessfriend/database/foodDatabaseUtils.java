@@ -134,9 +134,7 @@ public class foodDatabaseUtils {
 
         }
 
-        ArrayList<String> reverseFoodList = new ArrayList<>();
-
-         Collections.reverse(foodrecords);
+        Collections.reverse(foodrecords);
 
 
 

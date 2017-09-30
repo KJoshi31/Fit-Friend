@@ -8,6 +8,8 @@ import android.util.Log;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import edu.bu.fitnessfriend.fitnessfriend.model.exercise;
@@ -107,5 +109,34 @@ public class exerciseDatabaseUtils {
         cursor.close();
 
         return exerciseCalorieBurntToday;
+    }
+
+    public ArrayList<String> getExerciseHistoryList(){
+
+
+        ArrayList<String> exerciserecords = new ArrayList<>();
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+        cursor = db.rawQuery("select * from exercises",null);
+
+        while (cursor.moveToNext()){
+            String exName = cursor.getString(cursor.getColumnIndex("exercise_name"));
+            String exCal = cursor.getString(cursor.getColumnIndex("exercise_calorie"));
+            String exDuration = cursor.getString(cursor.getColumnIndex("exercise_duration"));
+            String exUnit = cursor.getString(cursor.getColumnIndex("exercise_unit"));
+            String exRecordDate = cursor.getString(cursor.getColumnIndex("exercise_log_date"));
+
+            String record = "\nExercise Name: "+exName+"\nExercise Calories: "+exCal+
+                    "\nExercise Duration: "+exDuration+" "+exUnit+
+                    "\nAdd Date: "+exRecordDate;
+
+            exerciserecords.add(record);
+        }
+
+        cursor.close();
+        Collections.reverse(exerciserecords);
+
+        return exerciserecords;
     }
 }
