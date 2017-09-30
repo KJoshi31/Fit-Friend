@@ -9,6 +9,8 @@ import android.util.Log;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import edu.bu.fitnessfriend.fitnessfriend.model.food;
@@ -109,6 +111,38 @@ public class foodDatabaseUtils {
         cursor.close();
 
         return foodCalorieTotal;
+    }
+
+    public ArrayList<String> getFoodHistoryList (){
+
+        ArrayList<String> foodrecords = new ArrayList<>();
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+        cursor = db.rawQuery("select * from foods",null);
+
+        while(cursor.moveToNext()){
+            String foodName = cursor.getString(cursor.getColumnIndex("food_name"));
+            String foodQty = cursor.getString(cursor.getColumnIndex("food_qty"));
+            String foodCal = cursor.getString(cursor.getColumnIndex("food_calorie"));
+            String foodRecordDate = cursor.getString(cursor.getColumnIndex("food_log_date"));
+
+            String record = "\nFood Name: "+foodName+"\nFood Qty: "+foodQty+"\nFood Cal: "+foodCal+
+                    "\nAdd Date: "+foodRecordDate;
+
+            foodrecords.add(record);
+
+        }
+
+        ArrayList<String> reverseFoodList = new ArrayList<>();
+
+         Collections.reverse(foodrecords);
+
+
+
+
+        cursor.close();
+        return foodrecords;
     }
 
 }
