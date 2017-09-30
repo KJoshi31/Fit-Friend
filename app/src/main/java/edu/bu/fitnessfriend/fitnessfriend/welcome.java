@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
 public class welcome extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         displayName();
-
+        displayFoodTotalToday();
 
     }
 
@@ -79,6 +80,7 @@ public class welcome extends AppCompatActivity {
         super.onResume();
         setContentView(R.layout.activity_welcome);
         displayName();
+        displayFoodTotalToday();
 
 
     }
@@ -96,6 +98,32 @@ public class welcome extends AppCompatActivity {
         Log.d("username", userName);
         TextView welcomeDisplay = (TextView) findViewById(R.id.welcom_back_lbl);
         welcomeDisplay.setText("Welcome "+ userName);
+    }
+
+    public void displayFoodTotalToday(){
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+        myDatabaseHandler dbHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+
+        foodDatabaseUtils foodUtils = new foodDatabaseUtils(dbHandler);
+
+        int foodItemCount = foodUtils.foodItemNumber(currentDateTimeString);
+
+        Log.d("food item count",String.valueOf(foodItemCount));
+
+        TextView foodLoggedTodayLabel = (TextView)findViewById(R.id.food_log_lbl);
+
+        String foodLoggedTodayText = foodLoggedTodayLabel.getText() + " "
+                +String.valueOf(foodItemCount)+" Items";
+
+        foodLoggedTodayLabel.setText(foodLoggedTodayText);
+
+        TextView foodCaloriesEatenTodayLabel = (TextView)findViewById(R.id.cal_eaten_lbl);
+        int foodCaloriesToday = foodUtils.foodTotalCalories(currentDateTimeString);
+        String foodCaloriesTodayText = foodCaloriesEatenTodayLabel.getText()+" "+
+                String.valueOf(foodCaloriesToday)+ " Calories";
+
+        foodCaloriesEatenTodayLabel.setText(foodCaloriesTodayText);
     }
 
 }
