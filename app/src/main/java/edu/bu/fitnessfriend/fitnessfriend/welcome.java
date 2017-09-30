@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
@@ -41,7 +42,7 @@ public class welcome extends AppCompatActivity {
 
         displayName();
         displayFoodTotalToday();
-
+        displayExerciseTotalToday();
     }
 
 
@@ -81,7 +82,7 @@ public class welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         displayName();
         displayFoodTotalToday();
-
+        displayExerciseTotalToday();
 
     }
 
@@ -124,6 +125,34 @@ public class welcome extends AppCompatActivity {
                 String.valueOf(foodCaloriesToday)+ " Calories";
 
         foodCaloriesEatenTodayLabel.setText(foodCaloriesTodayText);
+    }
+
+    public void displayExerciseTotalToday(){
+
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+        myDatabaseHandler dbHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+
+        exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(dbHandler);
+
+        int exerciseCountToday = exerciseDatabaseUtils.exerciseItemNumber(currentDateTimeString);
+
+        TextView exercisesLoggedTodayLabel = (TextView) findViewById(R.id.ex_log_lbl);
+
+        String exLoggedTodayText = exercisesLoggedTodayLabel.getText() + " "
+                +String.valueOf(exerciseCountToday)+" Exercises";
+
+        exercisesLoggedTodayLabel.setText(exLoggedTodayText);
+
+
+        TextView caloriesBurntTodayLabel = (TextView) findViewById(R.id.cal_burnt_lbl);
+        int calsBurntToday = exerciseDatabaseUtils.exerciseTotalCalories(currentDateTimeString);
+
+        String updatedCaloriesBurntTodayLabel = caloriesBurntTodayLabel.getText() + " "+
+                String.valueOf(calsBurntToday) + " Calories";
+
+
+        caloriesBurntTodayLabel.setText(updatedCaloriesBurntTodayLabel);
     }
 
 }
