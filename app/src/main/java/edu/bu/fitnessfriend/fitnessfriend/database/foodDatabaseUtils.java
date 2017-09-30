@@ -1,9 +1,14 @@
 package edu.bu.fitnessfriend.fitnessfriend.database;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.bu.fitnessfriend.fitnessfriend.model.food;
@@ -36,6 +41,74 @@ public class foodDatabaseUtils {
 
         db.insert(foodDatabase.TABLE_FOOD,null, values);
         db.close();
+    }
+
+    public int foodItemNumber(String today){
+
+        Cursor cursor = null;
+        int foodItems = 0;
+
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from foods",null);
+
+        SimpleDateFormat dateFormater=new SimpleDateFormat("MMM dd, yyyy");
+
+
+        while(cursor.moveToNext()){
+            String foodRecordDate = cursor.getString(cursor.getColumnIndex("food_log_date"));
+
+            Log.d("food's record date",foodRecordDate);
+
+            try {
+                Date recordDate = dateFormater.parse(foodRecordDate);
+                Date todayDate = dateFormater.parse(today);
+
+                int compare = recordDate.compareTo(todayDate);
+
+                if(compare == 0) foodItems++;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        cursor.close();
+
+        return foodItems;
+    }
+
+    public int foodTotalCalories(String today){
+
+        Cursor cursor = null;
+        int foodCalorieTotal = 0;
+
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from foods",null);
+
+        SimpleDateFormat dateFormater=new SimpleDateFormat("MMM dd, yyyy");
+
+        while(cursor.moveToNext()){
+            String foodRecordDate = cursor.getString(cursor.getColumnIndex("food_log_date"));
+            int foodCal = Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_calorie")));
+
+            try {
+                Date recordDate = dateFormater.parse(foodRecordDate);
+                Date todayDate = dateFormater.parse(today);
+
+                int compare = recordDate.compareTo(todayDate);
+
+                if(compare == 0){
+                    foodCalorieTotal = foodCalorieTotal + foodCal;
+                }
+
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        cursor.close();
+
+        return foodCalorieTotal;
     }
 
 }
