@@ -63,9 +63,17 @@
 
 
     <!--These are the labels for the activity_message_options.xml file-->
-    <string name="message_options_lbl">Message Options</string>
-    <string name="food_log_reminders_lbl">Send Food Logging Reminders?</string>
-    <string name="exercise_log_reminders_lbl">Send Exercise Logging Reminders?</string>
+    <string name="food_reminder_lbl">Food Reminder</string>
+    <string name="exercise_reminder_lbl">Exercise Reminder</string>
+    <string name="set_time_btn_lbl">Select Time</string>
+    <string name="set_date_btn_lbl">Select Date</string>
+    <string name="text_message_radio_btn_lbl">Text Message</string>
+    <string name="notification_message_radio_btn_lbl">Notification Message</string>
+    <string name="notif_type_lbl">Notification Type</string>
+    <string name="set_food_reminder_btn_lbl">Set Food Reminder!</string>
+    <string name="set_ex_reminder_btn_lbl">Set Exercise Reminder!</string>
+    <string name="date_selected">Date Selected: N/A</string>
+    <string name="time_selected">Time Selected: N/A</string>
 
 
     <!--These are the utility strings that are used in application-->

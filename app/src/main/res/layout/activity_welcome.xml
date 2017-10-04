@@ -135,13 +135,13 @@
         android:id="@+id/food_reminder_btn"
         android:layout_width="180dp"
         android:layout_height="55dp"
-        android:onClick="navigateAddFoodPage"
-        android:text="@string/food_reminder_btn_lbl"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="navigateFoodReminderPage"
+        android:text="@string/food_reminder_btn_lbl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/food_history_btn"
         app:layout_constraintVertical_bias="0.062" />
 
@@ -149,14 +149,14 @@
         android:id="@+id/ex_reminder_btn"
         android:layout_width="180dp"
         android:layout_height="55dp"
-        android:onClick="navigateAddFoodPage"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="navigateExReminderPage"
         android:text="@string/ex_reminder_btn_lbl"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ex_history_btn"
-        app:layout_constraintVertical_bias="0.063"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintVertical_bias="0.063" />
 
 </android.support.constraint.ConstraintLayout>
