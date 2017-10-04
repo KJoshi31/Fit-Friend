@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="46e1f523a2b43e15c4ed174e6de32ecfa0e88948">
+        sha1="93e2a1eb4b1763d871affada6adeb856ad63fd82">
         <dex dex="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_94f7c7af6af9eb5e713feae05dc7f4fbfab29eb4\classes.dex" />
     </item>
     <item
@@ -18,6 +18,15 @@
         revision="26.0.1"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6b967d5d1512a618069349d975d1e52e8f3933f7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\karan\Documents\projects\FitnessFriend\app\libs\joda-time-2.9.9.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f7b520c458572890807d143670c9b24f4de90897">
+        <dex dex="C:\Users\karan\Documents\projects\FitnessFriend\app\build\intermediates\transforms\dex\debug\folders\1000\2\joda-time-2.9.9_b42a8bd327a57bcbd26947bcebd1328316537c64\classes.dex" />
     </item>
 
 </items>

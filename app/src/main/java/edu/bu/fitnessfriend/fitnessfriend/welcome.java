@@ -70,11 +70,18 @@ public class welcome extends AppCompatActivity {
         startActivity(foodHistoryIntent);
     }
 
-    //function that gets called when message reminder options button is pressed on welcome page
-    protected void navigateMessageOptionsPage(View view){
-        Intent messageReminderOptionsIntent = new Intent(this, message_options.class );
-        startActivity(messageReminderOptionsIntent);
+    //function that gets called when the food reminder button is pressed on welcome page
+    protected void navigateFoodReminderPage(View view){
+        Intent foodReminderIntent = new Intent(this,food_reminder.class);
+        startActivity(foodReminderIntent);
     }
+
+    //function that gets called when the exercise reminder button is pressed on welcome page
+    protected void navigateExReminderPage(View view){
+        Intent exReminderIntent = new Intent(this,exercise_reminder.class);
+        startActivity(exReminderIntent);
+    }
+
 
     @Override
     public void onResume(){
