@@ -13,38 +13,40 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginEnd="19dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="8dp"
         android:text="@string/welcome_back_lbl"
         android:textAlignment="center"
         android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/cal_eaten_lbl"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:text="@string/calories_eaten_lbl"
         android:textSize="18sp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/welcom_back_lbl" />
+        app:layout_constraintTop_toBottomOf="@+id/welcom_back_lbl"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/cal_burnt_lbl"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:text="@string/calories_burnt_lbl"
         android:textSize="18sp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
@@ -54,10 +56,12 @@
 
     <TextView
         android:id="@+id/food_log_lbl"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:text="@string/food_logged_today_lbl"
         android:textSize="18sp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
@@ -67,79 +71,92 @@
 
     <TextView
         android:id="@+id/ex_log_lbl"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:text="@string/exercises_logged_today_lbl"
         android:textSize="17sp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/cal_burnt_lbl" />
 
     <Button
-        android:id="@+id/ex_history_btn"
-        android:layout_width="185dp"
-        android:layout_height="50dp"
-        android:layout_weight="0.29"
-        android:text="@string/exercise_history_btn_lbl"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/add_ex_btn"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/food_history_btn"
-        android:layout_marginBottom="8dp"
-        android:onClick="navigateExerciseHistoryPage"/>
+        android:id="@+id/add_food_btn"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:onClick="navigateAddFoodPage"
+        android:text="@string/add_food_btn_lbl"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/add_ex_btn"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="87dp"
+        app:layout_constraintTop_toBottomOf="@+id/food_log_lbl" />
 
     <Button
         android:id="@+id/add_ex_btn"
-        android:layout_width="185dp"
-        android:layout_height="50dp"
-        android:text="@string/add_exercise_btn_lbl"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ex_history_btn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/ex_history_btn"
-        tools:layout_constraintBaseline_creator="1"
-        android:onClick="navigateAddExercisePage"/>
+        android:layout_width="180dp"
+        android:layout_height="55dp"
 
-    <Button
-        android:id="@+id/add_food_btn"
-        android:layout_width="185dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="7dp"
-        android:text="@string/add_food_btn_lbl"
-        app:layout_constraintBottom_toTopOf="@+id/msg_reminders_btn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/food_history_btn"
-        tools:layout_constraintBottom_creator="1"
-        android:onClick="navigateAddFoodPage"/>
+        android:onClick="navigateAddExercisePage"
+        android:text="@string/add_exercise_btn_lbl"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="87dp"
+        app:layout_constraintTop_toBottomOf="@+id/food_log_lbl" />
 
     <Button
         android:id="@+id/food_history_btn"
-        android:layout_width="185dp"
-        android:layout_height="50dp"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:onClick="navigateFoodHistoryPage"
         android:text="@string/food_history_btn_lbl"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/add_food_btn"
-        app:layout_constraintBaseline_toBaselineOf="@+id/add_food_btn"
-        tools:layout_constraintBaseline_creator="1"
-        android:onClick="navigateFoodHistoryPage"/>
+        android:layout_marginLeft="7dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/add_food_btn" />
 
     <Button
-        android:id="@+id/msg_reminders_btn"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="@string/message_options_btn_lbl"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/ex_history_btn"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:text="@string/exercise_history_btn_lbl"
+        android:onClick="navigateExerciseHistoryPage"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/food_history_btn" />
+
+    <Button
+        android:id="@+id/food_reminder_btn"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:onClick="navigateAddFoodPage"
+        android:text="@string/food_reminder_btn_lbl"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:onClick="navigateMessageOptionsPage"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/food_history_btn"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <Button
+        android:id="@+id/ex_reminder_btn"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:onClick="navigateAddFoodPage"
+        android:text="@string/ex_reminder_btn_lbl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ex_history_btn"
+        app:layout_constraintVertical_bias="0.063"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
