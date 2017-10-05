@@ -13,6 +13,8 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
 
+import org.joda.time.DateTime;
+
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 
@@ -22,6 +24,14 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     private boolean radioButtonSelected = false;
     private String reminderType = "";
 
+    private int _month = -1;
+    private int _day = -1;
+    private int _year = -1;
+
+    private int _hour = -1;
+    private int _minute = -1;
+
+    DateTime setDateTime = new DateTime();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +83,32 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        _month = month;
+        _day = dayOfMonth;
+        _year = year;
 
+        Log.d("dayOfMonth",String.valueOf(dayOfMonth));
+
+        setDateTime = setDateTime.withMonthOfYear(_month+1)
+                .withDayOfMonth(_day)
+                .withYear(_year);
+
+        Log.d("month",String.valueOf(setDateTime.getMonthOfYear()));
+        Log.d("day",String.valueOf(setDateTime.getDayOfMonth()));
+        Log.d("year",String.valueOf(setDateTime.getYear()));
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        _hour = hourOfDay;
+        _minute = minute;
+
+        setDateTime = setDateTime.withHourOfDay(_hour)
+                .withMinuteOfHour(_minute);
+
+        Log.d("hour",String.valueOf(setDateTime.getHourOfDay()));
+        Log.d("minute",String.valueOf(setDateTime.getMinuteOfHour()));
+
 
     }
 
