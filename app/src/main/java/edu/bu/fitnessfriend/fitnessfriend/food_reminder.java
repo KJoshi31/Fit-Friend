@@ -1,5 +1,6 @@
 package edu.bu.fitnessfriend.fitnessfriend;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -29,6 +30,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         Button setFoodReminderBtn = (Button) findViewById(R.id.set_food_reminder_btn);
         setFoodReminderBtn.setEnabled(false);
+
+        String[] permissions = {Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE};
+        requestPermissions(permissions,1);
     }
 
 
@@ -76,4 +80,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
     }
+
+
 }
