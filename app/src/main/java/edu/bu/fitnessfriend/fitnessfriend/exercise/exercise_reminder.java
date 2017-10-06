@@ -18,6 +18,7 @@ import org.joda.time.DateTime;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
+import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
 
 public class exercise_reminder extends AppCompatActivity implements
@@ -43,8 +44,7 @@ public class exercise_reminder extends AppCompatActivity implements
         Button setExerciseReminderBtn = (Button) findViewById(R.id.set_ex_reminder_btn);
         setExerciseReminderBtn.setEnabled(false);
 
-        String[] permissions = {Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE};
-        requestPermissions(permissions,1);
+        reminder_service.getPhonePermissions(this);
     }
 
 

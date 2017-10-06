@@ -44,10 +44,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         Button setFoodReminderBtn = (Button) findViewById(R.id.set_food_reminder_btn);
         setFoodReminderBtn.setEnabled(false);
 
-        String[] permissions = {Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE};
-        requestPermissions(permissions,1);
-
-        reminder_service.hasPhonePermissions(getApplicationContext());
+        reminder_service.getPhonePermissions(this);
     }
 
 
