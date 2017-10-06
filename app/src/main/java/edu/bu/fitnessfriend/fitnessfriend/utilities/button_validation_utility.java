@@ -3,6 +3,7 @@ package edu.bu.fitnessfriend.fitnessfriend.utilities;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -60,6 +61,10 @@ public class button_validation_utility {
         for(int i = 0; i<textFields.size(); i++){
             textFields.get(i).setText("");
         }
+    }
+
+    public static void clearRadioGroup(RadioGroup rdio){
+        rdio.clearCheck();
     }
 
 
