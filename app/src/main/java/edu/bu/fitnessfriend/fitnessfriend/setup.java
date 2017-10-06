@@ -6,10 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +19,7 @@ import java.util.ArrayList;
 import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.model.demographic;
+import edu.bu.fitnessfriend.fitnessfriend.utilities.button_validation_utility;
 
 /**
  * Created by karan on 9/9/2017.

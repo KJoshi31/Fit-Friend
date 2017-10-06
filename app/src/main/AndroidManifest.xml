@@ -26,36 +26,28 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".add_exercise">
+        <activity android:name=".exercise.add_exercise">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".add_food">
+        <activity android:name=".food.add_food">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".exercise_history">
+        <activity android:name=".exercise.exercise_history">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".food_history">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".food_reminder" >
+        <activity android:name=".food.food_history">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -63,8 +55,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".food.food_reminder" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-        <activity android:name=".exercise_reminder">
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".exercise.exercise_reminder">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

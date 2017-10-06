@@ -6,13 +6,13 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
+import org.joda.time.DateTime;
+
 /**
  * Created by karan on 10/4/2017.
  */
 
 public class reminder_service {
-
-
 
 
     public static void sendSmsMessage(Context c){
@@ -24,4 +24,5 @@ public class reminder_service {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber,null,"hi",null,null);
     }
+
 }
