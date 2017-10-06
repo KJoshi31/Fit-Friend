@@ -18,6 +18,7 @@ import org.joda.time.DateTime;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
+import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
 
 public class food_reminder extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
@@ -45,6 +46,8 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         String[] permissions = {Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE};
         requestPermissions(permissions,1);
+
+        reminder_service.hasPhonePermissions(getApplicationContext());
     }
 
 
