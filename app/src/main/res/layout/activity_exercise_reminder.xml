@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.bu.fitnessfriend.fitnessfriend.exercise_reminder">
+    tools:context="edu.bu.fitnessfriend.fitnessfriend.exercise.exercise_reminder">
 
     <TextView
         android:id="@+id/exercise_reminder_lbl"

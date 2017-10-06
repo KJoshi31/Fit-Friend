@@ -3,7 +3,6 @@ package edu.bu.fitnessfriend.fitnessfriend;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,12 @@ import edu.bu.fitnessfriend.fitnessfriend.database.demographicDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.exercise.add_exercise;
+import edu.bu.fitnessfriend.fitnessfriend.exercise.exercise_history;
+import edu.bu.fitnessfriend.fitnessfriend.exercise.exercise_reminder;
+import edu.bu.fitnessfriend.fitnessfriend.food.add_food;
+import edu.bu.fitnessfriend.fitnessfriend.food.food_history;
+import edu.bu.fitnessfriend.fitnessfriend.food.food_reminder;
 
 public class welcome extends AppCompatActivity {
 
