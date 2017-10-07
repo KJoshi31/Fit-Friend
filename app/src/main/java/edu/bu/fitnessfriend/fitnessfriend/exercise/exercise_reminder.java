@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
@@ -19,7 +20,9 @@ import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
+import edu.bu.fitnessfriend.fitnessfriend.utilities.button_validation_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
+import edu.bu.fitnessfriend.fitnessfriend.utilities.misc_utility;
 
 public class exercise_reminder extends AppCompatActivity implements
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
@@ -34,6 +37,8 @@ public class exercise_reminder extends AppCompatActivity implements
     private int _hour = -1;
     private int _minute = -1;
 
+    private long millisecondsWait = new DateTime().getMillis();
+
     DateTime setDateTime = new DateTime();
 
     @Override
@@ -41,10 +46,9 @@ public class exercise_reminder extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_reminder);
 
-        Button setExerciseReminderBtn = (Button) findViewById(R.id.set_ex_reminder_btn);
-        setExerciseReminderBtn.setEnabled(false);
-
-        reminder_service.getPhonePermissions(this);
+        if(!reminder_service.hasPhonePermissions(this)){
+            reminder_service.getPhonePermissions(this);
+        }
     }
 
 
@@ -96,10 +100,6 @@ public class exercise_reminder extends AppCompatActivity implements
         setDateTime = setDateTime.withMonthOfYear(_month+1)
                 .withDayOfMonth(_day)
                 .withYear(_year);
-
-        Log.d("month",String.valueOf(setDateTime.getMonthOfYear()));
-        Log.d("day",String.valueOf(setDateTime.getDayOfMonth()));
-        Log.d("year",String.valueOf(setDateTime.getYear()));
     }
 
     @Override
@@ -109,13 +109,25 @@ public class exercise_reminder extends AppCompatActivity implements
 
         setDateTime = setDateTime.withHourOfDay(_hour)
                 .withMinuteOfHour(_minute);
-
-        Log.d("hour",String.valueOf(setDateTime.getHourOfDay()));
-        Log.d("minute",String.valueOf(setDateTime.getMinuteOfHour()));
-
-        long millis = date_utility.getWaitTime(setDateTime);
-        Log.d("greater than 0",String.valueOf(date_utility.millisecondsPositive(millis)));
     }
 
+    protected void setReminder(View v) {
+        boolean hasPermissions = reminder_service.hasPhonePermissions(getApplicationContext());
+
+        millisecondsWait = date_utility.getWaitTime(setDateTime);
+        boolean positiveTime = date_utility.millisecondsPositive(millisecondsWait);
+
+        if (hasPermissions && positiveTime && radioButtonSelected) {
+            misc_utility.successSetReminderSnackbar(v);
+            button_validation_utility.clearRadioGroup((RadioGroup)
+                    findViewById(R.id.notif_type_ex_radio_group));
+            radioButtonSelected = false;
+
+        } else {
+            misc_utility.errorSetReminderSnackbar(v);
+
+        }
+
+    }
 
 }
