@@ -22,6 +22,7 @@ import edu.bu.fitnessfriend.fitnessfriend.model.food;
 public class foodDatabaseUtils {
 
     private myDatabaseHandler.foodDB foodDatabase = null;
+    private myDatabaseHandler.foodReminderDB foodRemindersDB = null;
     private myDatabaseHandler _handler;
 
     public foodDatabaseUtils(myDatabaseHandler handler){
@@ -74,6 +75,7 @@ public class foodDatabaseUtils {
             }
         }
         cursor.close();
+        db.close();
 
         return foodItems;
     }
@@ -109,6 +111,7 @@ public class foodDatabaseUtils {
             }
         }
         cursor.close();
+        db.close();
 
         return foodCalorieTotal;
     }
@@ -136,11 +139,48 @@ public class foodDatabaseUtils {
 
         Collections.reverse(foodrecords);
 
-
-
-
         cursor.close();
+        db.close();
         return foodrecords;
+    }
+
+    public void insertReminderDate(String reminderType, String logType, long milliseconds){
+        ContentValues values = new ContentValues();
+
+        values.put(foodRemindersDB.LOG_TYPE, logType);
+        values.put(foodRemindersDB.REMINDER_TYPE, reminderType);
+        values.put(foodRemindersDB.WAIT_MILLISECONDS,milliseconds);
+
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.insert(foodRemindersDB.TABLE_FOOD_REMINDER,null, values);
+        db.close();
+    }
+
+    public void deleteAllFoodReminders(){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER);
+        cursor.close();
+        db.close();
+    }
+
+    public void deleteAllReminderType(String reminderType){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER+" WHERE "+
+        foodRemindersDB.REMINDER_TYPE+" = "+reminderType);
+        cursor.close();
+        db.close();
+    }
+
+    public void deleteSpecificReminder(String reminderType, String logType, long milliseconds){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER+" WHERE "+
+                foodRemindersDB.REMINDER_TYPE+" = "+reminderType + " AND "+foodRemindersDB.LOG_TYPE+
+        " = "+logType + " AND "+foodRemindersDB.WAIT_MILLISECONDS + " = " + String.valueOf(milliseconds));
+        cursor.close();
+        db.close();
     }
 
 }
