@@ -22,6 +22,6 @@ public class date_utility {
     }
 
     public static boolean millisecondsPositive(long milliseconds){
-         return  (milliseconds>0);
+         return  (milliseconds>=0);
     }
 }
