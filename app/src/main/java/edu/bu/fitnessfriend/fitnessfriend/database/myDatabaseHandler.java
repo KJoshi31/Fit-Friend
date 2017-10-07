@@ -44,6 +44,22 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String DEMOGRAPHIC_ACTIVITY_LVL = "activity_level";
     }
 
+    protected class foodReminderDB{
+        public static final String TABLE_FOOD_REMINDER = "food_reminders";
+        public static final String REMINDER_ID = "id";
+        public static final String LOG_TYPE = "log_type";
+        public static final String REMINDER_TYPE = "reminder_type";
+        public static final String WAIT_MILLISECONDS = "wait_milliseconds";
+    }
+
+    protected class exerciseRemindersDB{
+        public static final String TABLE_EX_REMINDER = "exercise_reminders";
+        public static final String REMINDER_ID = "id";
+        public static final String LOG_TYPE = "log_type";
+        public static final String REMINDER_TYPE = "reminder_type";
+        public static final String WAIT_MILLISECONDS = "wait_milliseconds";
+    }
+
     public myDatabaseHandler(Context context, String name ,
                              SQLiteDatabase.CursorFactory factory, int version){
         super(context,DB_NAME,factory, DB_VERSION);
@@ -72,9 +88,21 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
                 " INTEGER, "+ demographicDB.DEMOGRAPHIC_INCH + " INTEGER, "+ demographicDB.DEMOGRAPHIC_ACTIVITY_LVL+
                 " TEXT "+")";
 
+        String CREATE_FOOD_REMINDERS_TABLE = "CREATE TABLE "+foodReminderDB.TABLE_FOOD_REMINDER+
+                "("+foodReminderDB.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                foodReminderDB.LOG_TYPE + " TEXT, "+foodReminderDB.REMINDER_TYPE + " TEXT, "+
+                foodReminderDB.WAIT_MILLISECONDS + " TEXT " +")";
+
+        String CREATE_EX_REMINDERS_TABLE = "CREATE TABLE "+exerciseRemindersDB.TABLE_EX_REMINDER+
+                "("+exerciseRemindersDB.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                exerciseRemindersDB.LOG_TYPE + " TEXT, "+exerciseRemindersDB.REMINDER_TYPE + " TEXT, "+
+                exerciseRemindersDB.WAIT_MILLISECONDS + " TEXT " +")";
+
         db.execSQL(CREATE_DEMOGRAPHIC_TABLE);
         db.execSQL(CREATE_FOOD_TABLE);
         db.execSQL(CREATE_EXERCISE_TABLE);
+        db.execSQL(CREATE_FOOD_REMINDERS_TABLE);
+        db.execSQL(CREATE_EX_REMINDERS_TABLE);
 
     }
 
@@ -83,6 +111,8 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+demographicDB.TABLE_DEMOGRAPH);
         db.execSQL("DROP TABLE IF EXISTS "+foodDB.TABLE_FOOD);
         db.execSQL("DROP TABLE IF EXISTS "+exerciseDB.TABLE_EXERCISE);
+        db.execSQL("DROP TABLE IF EXISTS "+foodReminderDB.TABLE_FOOD_REMINDER);
+        db.execSQL("DROP TABLE IF EXISTS "+exerciseRemindersDB.TABLE_EX_REMINDER);
         onCreate(db);
     }
 }
