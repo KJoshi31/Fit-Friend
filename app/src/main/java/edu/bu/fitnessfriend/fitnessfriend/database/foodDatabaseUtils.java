@@ -149,11 +149,33 @@ public class foodDatabaseUtils {
 
         values.put(foodRemindersDB.LOG_TYPE, logType);
         values.put(foodRemindersDB.REMINDER_TYPE, reminderType);
-        values.put(foodRemindersDB.WAIT_MILLISECONDS,milliseconds);
+        values.put(foodRemindersDB.WAIT_MILLISECONDS,String.valueOf(milliseconds));
 
         SQLiteDatabase db = _handler.getWritableDatabase();
         db.insert(foodRemindersDB.TABLE_FOOD_REMINDER,null, values);
         db.close();
+    }
+
+    public ArrayList<String> getLogInfo(){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+        cursor = db.rawQuery("select * from "+foodRemindersDB.TABLE_FOOD_REMINDER,null);
+
+        cursor.moveToLast();
+
+        String logType = cursor.getString(cursor.getColumnIndex(foodRemindersDB.LOG_TYPE));
+        String reminderType = cursor.getString(cursor.getColumnIndex(foodRemindersDB.REMINDER_TYPE));
+        String milliseconds = cursor.getString(cursor.getColumnIndex(foodRemindersDB.WAIT_MILLISECONDS));
+
+        cursor.close();
+        db.close();
+
+        ArrayList<String> logInfo = new ArrayList<>();
+        logInfo.add(logType);
+        logInfo.add(reminderType);
+        logInfo.add(milliseconds);
+
+        return logInfo;
     }
 
     public void deleteAllFoodReminders(){
