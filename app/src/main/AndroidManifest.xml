@@ -72,6 +72,11 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".reminder_service"
+            android:enabled="true"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
