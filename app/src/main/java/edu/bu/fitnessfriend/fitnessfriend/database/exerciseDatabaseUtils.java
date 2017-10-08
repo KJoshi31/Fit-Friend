@@ -21,6 +21,7 @@ import edu.bu.fitnessfriend.fitnessfriend.model.exercise;
 public class exerciseDatabaseUtils {
 
     private myDatabaseHandler.exerciseDB exerciseDatabase = null;
+    private myDatabaseHandler.exerciseRemindersDB exerciseRemindersDB = null;
     private myDatabaseHandler _handler;
 
     public exerciseDatabaseUtils(myDatabaseHandler handler){
@@ -138,5 +139,65 @@ public class exerciseDatabaseUtils {
         Collections.reverse(exerciserecords);
 
         return exerciserecords;
+    }
+
+    public void insertReminderDate(String reminderType, String logType, long milliseconds){
+        ContentValues values = new ContentValues();
+
+        values.put(exerciseRemindersDB.LOG_TYPE, logType);
+        values.put(exerciseRemindersDB.REMINDER_TYPE, reminderType);
+        values.put(exerciseRemindersDB.WAIT_MILLISECONDS,String.valueOf(milliseconds));
+
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.insert(exerciseRemindersDB.TABLE_EX_REMINDER,null, values);
+        db.close();
+    }
+
+    public ArrayList<String> getLogInfo(){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+        cursor = db.rawQuery("select * from "+exerciseRemindersDB.TABLE_EX_REMINDER,null);
+
+        cursor.moveToLast();
+
+        String logType = cursor.getString(cursor.getColumnIndex(exerciseRemindersDB.LOG_TYPE));
+        String reminderType = cursor.getString(cursor.getColumnIndex(exerciseRemindersDB.REMINDER_TYPE));
+        String milliseconds = cursor.getString(cursor.getColumnIndex(exerciseRemindersDB.WAIT_MILLISECONDS));
+
+        cursor.close();
+        db.close();
+
+        ArrayList<String> logInfo = new ArrayList<>();
+        logInfo.add(logType);
+        logInfo.add(reminderType);
+        logInfo.add(milliseconds);
+
+        return logInfo;
+    }
+
+    public void deleteAllFoodReminders(){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+exerciseRemindersDB.TABLE_EX_REMINDER);
+        cursor.close();
+        db.close();
+    }
+
+    public void deleteAllReminderType(String reminderType){
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+exerciseRemindersDB.TABLE_EX_REMINDER+" WHERE "+
+                exerciseRemindersDB.REMINDER_TYPE+" = "+"\"reminderType\"");
+        db.close();
+    }
+
+    public void deleteSpecificReminder(String logType,String reminderType, long milliseconds){
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.execSQL("DELETE FROM "+exerciseRemindersDB.TABLE_EX_REMINDER+" WHERE "+"("+
+                exerciseRemindersDB.REMINDER_TYPE+" = "+"\"reminderType\""+  " AND "+exerciseRemindersDB.LOG_TYPE+
+                " = "+"\"logType\"" + " AND "+exerciseRemindersDB.WAIT_MILLISECONDS + " = "
+                +"\"String.valueOf(milliseconds)\""+")");
+        cursor.close();
+        db.close();
     }
 }

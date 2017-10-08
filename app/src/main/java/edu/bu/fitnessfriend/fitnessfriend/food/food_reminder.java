@@ -18,6 +18,8 @@ import android.widget.TimePicker;
 import org.joda.time.DateTime;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
+import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
@@ -73,9 +75,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 break;
         }
 
-        Log.d("Radio button selected?",String.valueOf(radioButtonSelected));
-        Log.d("Reminder Type", reminderType);
-
     }
 
     public void showTimePicker(View v){
@@ -94,8 +93,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         _month = month;
         _day = dayOfMonth;
         _year = year;
-
-        Log.d("dayOfMonth",String.valueOf(dayOfMonth));
 
         setDateTime = setDateTime.withMonthOfYear(_month+1)
                 .withDayOfMonth(_day)
@@ -129,10 +126,15 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
             //because if the app is closed, the service cant call the intent
             //to get the information
 
-            stopService(serviceIntent);
+            myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(dbhandler);
+            foodDatabaseUtils.insertReminderDate(reminderType,"food",millisecondsWait);
+            dbhandler.close();
+
+            //stopService(serviceIntent);
+            Log.d("threads running",String.valueOf(Thread.activeCount()));
+
             startService(serviceIntent);
-
-
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)

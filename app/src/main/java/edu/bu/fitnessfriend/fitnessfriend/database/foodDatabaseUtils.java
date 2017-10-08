@@ -187,20 +187,19 @@ public class foodDatabaseUtils {
     }
 
     public void deleteAllReminderType(String reminderType){
-        Cursor cursor = null;
         SQLiteDatabase db = _handler.getWritableDatabase();
         db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER+" WHERE "+
-        foodRemindersDB.REMINDER_TYPE+" = "+reminderType);
-        cursor.close();
+        foodRemindersDB.REMINDER_TYPE+" = "+"\"reminderType\"");
         db.close();
     }
 
-    public void deleteSpecificReminder(String reminderType, String logType, long milliseconds){
+    public void deleteSpecificReminder(String logType,String reminderType, long milliseconds){
         Cursor cursor = null;
         SQLiteDatabase db = _handler.getWritableDatabase();
-        db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER+" WHERE "+
-                foodRemindersDB.REMINDER_TYPE+" = "+reminderType + " AND "+foodRemindersDB.LOG_TYPE+
-        " = "+logType + " AND "+foodRemindersDB.WAIT_MILLISECONDS + " = " + String.valueOf(milliseconds));
+        db.execSQL("DELETE FROM "+foodRemindersDB.TABLE_FOOD_REMINDER+" WHERE "+"("+
+                foodRemindersDB.REMINDER_TYPE+" = "+"\"reminderType\""+  " AND "+foodRemindersDB.LOG_TYPE+
+        " = "+"\"logType\"" + " AND "+foodRemindersDB.WAIT_MILLISECONDS + " = "
+                +"\"String.valueOf(milliseconds)\""+")");
         cursor.close();
         db.close();
     }

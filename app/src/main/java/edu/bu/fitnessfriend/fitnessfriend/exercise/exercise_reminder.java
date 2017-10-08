@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,8 @@ import android.widget.TimePicker;
 import org.joda.time.DateTime;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
+import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
@@ -119,10 +122,25 @@ public class exercise_reminder extends AppCompatActivity implements
 
         if (hasPermissions && positiveTime && radioButtonSelected) {
             misc_utility.successSetReminderSnackbar(v);
+
+            Intent serviceIntent = new Intent(this, reminder_service.class);
+            serviceIntent.putExtra("reminderType", reminderType);
+            serviceIntent.putExtra("millis",millisecondsWait);
+            serviceIntent.putExtra("logType","exercise");
+
+
+            myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(dbhandler);
+            exerciseDatabaseUtils.insertReminderDate(reminderType,"exercise",millisecondsWait);
+            dbhandler.close();
+
+            startService(serviceIntent);
+
+
             button_validation_utility.clearRadioGroup((RadioGroup)
                     findViewById(R.id.notif_type_ex_radio_group));
             radioButtonSelected = false;
-
+            reminderType = "";
         } else {
             misc_utility.errorSetReminderSnackbar(v);
 
