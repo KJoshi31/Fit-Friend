@@ -60,6 +60,12 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String WAIT_MILLISECONDS = "wait_milliseconds";
     }
 
+    protected class addedRemindersDB{
+        public static final String TABLE_LAST_REMINDERS = "last_added_reminder";
+        public static final String ID = "id";
+        public static final String LOGGED_REMINDER = "logged_reminder";
+    }
+
     public myDatabaseHandler(Context context, String name ,
                              SQLiteDatabase.CursorFactory factory, int version){
         super(context,DB_NAME,factory, DB_VERSION);
@@ -98,11 +104,16 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
                 exerciseRemindersDB.LOG_TYPE + " TEXT, "+exerciseRemindersDB.REMINDER_TYPE + " TEXT, "+
                 exerciseRemindersDB.WAIT_MILLISECONDS + " TEXT " +")";
 
+        String CREATE_ADDED_REMINDERS_TABLE = "CREATE TABLE " + addedRemindersDB.TABLE_LAST_REMINDERS+
+                "("+addedRemindersDB.ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                addedRemindersDB.LOGGED_REMINDER + " TEXT "+ ")";
+
         db.execSQL(CREATE_DEMOGRAPHIC_TABLE);
         db.execSQL(CREATE_FOOD_TABLE);
         db.execSQL(CREATE_EXERCISE_TABLE);
         db.execSQL(CREATE_FOOD_REMINDERS_TABLE);
         db.execSQL(CREATE_EX_REMINDERS_TABLE);
+        db.execSQL(CREATE_ADDED_REMINDERS_TABLE);
 
     }
 
@@ -113,6 +124,8 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+exerciseDB.TABLE_EXERCISE);
         db.execSQL("DROP TABLE IF EXISTS "+foodReminderDB.TABLE_FOOD_REMINDER);
         db.execSQL("DROP TABLE IF EXISTS "+exerciseRemindersDB.TABLE_EX_REMINDER);
+        db.execSQL("DROP TABLE IF EXISTS "+addedRemindersDB.TABLE_LAST_REMINDERS);
+
         onCreate(db);
     }
 }

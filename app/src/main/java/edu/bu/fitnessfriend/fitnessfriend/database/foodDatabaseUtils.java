@@ -23,6 +23,7 @@ public class foodDatabaseUtils {
 
     private myDatabaseHandler.foodDB foodDatabase = null;
     private myDatabaseHandler.foodReminderDB foodRemindersDB = null;
+    private myDatabaseHandler.addedRemindersDB addedRemindersDB = null;
     private myDatabaseHandler _handler;
 
     public foodDatabaseUtils(myDatabaseHandler handler){
@@ -201,6 +202,15 @@ public class foodDatabaseUtils {
         " = "+"\"logType\"" + " AND "+foodRemindersDB.WAIT_MILLISECONDS + " = "
                 +"\"String.valueOf(milliseconds)\""+")");
         cursor.close();
+        db.close();
+    }
+
+    public void insertLastLogged(String logType){
+        ContentValues values = new ContentValues();
+        values.put(addedRemindersDB.LOGGED_REMINDER,logType);
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.insert(addedRemindersDB.TABLE_LAST_REMINDERS,null, values);
+
         db.close();
     }
 

@@ -99,7 +99,7 @@
         android:layout_width="212dp"
         android:layout_height="71dp"
         android:layout_marginBottom="36dp"
-        android:onClick="setReminder"
+        android:onClick="setExerciseReminder"
         android:text="@string/set_ex_reminder_btn_lbl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

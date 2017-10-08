@@ -22,6 +22,7 @@ public class exerciseDatabaseUtils {
 
     private myDatabaseHandler.exerciseDB exerciseDatabase = null;
     private myDatabaseHandler.exerciseRemindersDB exerciseRemindersDB = null;
+    private myDatabaseHandler.addedRemindersDB addedRemindersDB = null;
     private myDatabaseHandler _handler;
 
     public exerciseDatabaseUtils(myDatabaseHandler handler){
@@ -72,6 +73,7 @@ public class exerciseDatabaseUtils {
             }
         }
         cursor.close();
+        db.close();
 
         return exerciseItems;
     }
@@ -108,6 +110,7 @@ public class exerciseDatabaseUtils {
             }
         }
         cursor.close();
+        db.close();
 
         return exerciseCalorieBurntToday;
     }
@@ -136,6 +139,7 @@ public class exerciseDatabaseUtils {
         }
 
         cursor.close();
+        db.close();
         Collections.reverse(exerciserecords);
 
         return exerciserecords;
@@ -198,6 +202,15 @@ public class exerciseDatabaseUtils {
                 " = "+"\"logType\"" + " AND "+exerciseRemindersDB.WAIT_MILLISECONDS + " = "
                 +"\"String.valueOf(milliseconds)\""+")");
         cursor.close();
+        db.close();
+    }
+
+    public void insertLastLogged(String logType){
+        ContentValues values = new ContentValues();
+        values.put(addedRemindersDB.LOGGED_REMINDER,logType);
+        SQLiteDatabase db = _handler.getWritableDatabase();
+        db.insert(addedRemindersDB.TABLE_LAST_REMINDERS,null, values);
+
         db.close();
     }
 }
