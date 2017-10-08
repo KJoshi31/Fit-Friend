@@ -20,7 +20,7 @@ import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
-import edu.bu.fitnessfriend.fitnessfriend.permissionUtils;
+import edu.bu.fitnessfriend.fitnessfriend.utilities.permissionUtils;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.button_validation_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.misc_utility;
