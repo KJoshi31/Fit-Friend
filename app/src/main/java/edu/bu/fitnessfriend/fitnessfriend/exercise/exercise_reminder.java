@@ -1,14 +1,13 @@
 package edu.bu.fitnessfriend.fitnessfriend.exercise;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,9 +16,11 @@ import android.widget.TimePicker;
 import org.joda.time.DateTime;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
+import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
-import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
+import edu.bu.fitnessfriend.fitnessfriend.permissionUtils;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.button_validation_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.misc_utility;
@@ -40,14 +41,15 @@ public class exercise_reminder extends AppCompatActivity implements
     private long millisecondsWait = new DateTime().getMillis();
 
     DateTime setDateTime = new DateTime();
+    private String logType = "exercise";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_reminder);
 
-        if(!reminder_service.hasPhonePermissions(this)){
-            reminder_service.getPhonePermissions(this);
+        if(!permissionUtils.hasPhonePermissions(this)){
+            permissionUtils.getPhonePermissions(this);
         }
     }
 
@@ -111,18 +113,35 @@ public class exercise_reminder extends AppCompatActivity implements
                 .withMinuteOfHour(_minute);
     }
 
-    protected void setReminder(View v) {
-        boolean hasPermissions = reminder_service.hasPhonePermissions(getApplicationContext());
+    protected void setExerciseReminder(View v) {
+        boolean hasPermissions = permissionUtils.hasPhonePermissions(getApplicationContext());
 
         millisecondsWait = date_utility.getWaitTime(setDateTime);
         boolean positiveTime = date_utility.millisecondsPositive(millisecondsWait);
 
         if (hasPermissions && positiveTime && radioButtonSelected) {
             misc_utility.successSetReminderSnackbar(v);
+
+            Intent serviceIntent = new Intent(this, exercise_reminder_service.class);
+            serviceIntent.putExtra("reminderType", reminderType);
+            serviceIntent.putExtra("millis",millisecondsWait);
+            serviceIntent.putExtra("logType",logType);
+
+
+            myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(dbhandler);
+            exerciseDatabaseUtils.insertReminderDate(reminderType,"exercise",millisecondsWait);
+            exerciseDatabaseUtils.insertLastLogged(logType);
+
+            dbhandler.close();
+
+            startService(serviceIntent);
+
+
             button_validation_utility.clearRadioGroup((RadioGroup)
                     findViewById(R.id.notif_type_ex_radio_group));
             radioButtonSelected = false;
-
+            reminderType = "";
         } else {
             misc_utility.errorSetReminderSnackbar(v);
 

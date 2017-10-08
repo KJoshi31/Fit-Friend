@@ -1,6 +1,5 @@
 package edu.bu.fitnessfriend.fitnessfriend.food;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,9 +16,11 @@ import android.widget.TimePicker;
 import org.joda.time.DateTime;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
+import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
-import edu.bu.fitnessfriend.fitnessfriend.reminder_service;
+import edu.bu.fitnessfriend.fitnessfriend.permissionUtils;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.button_validation_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.date_utility;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.misc_utility;
@@ -41,6 +41,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     private long millisecondsWait = new DateTime().getMillis();
 
     DateTime setDateTime = new DateTime();
+    private String logType = "food";
 
 
     @Override
@@ -48,8 +49,8 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_reminder);
 
-        if(!reminder_service.hasPhonePermissions(this)){
-            reminder_service.getPhonePermissions(this);
+        if(!permissionUtils.hasPhonePermissions(this)){
+            permissionUtils.getPhonePermissions(this);
         }
     }
 
@@ -73,9 +74,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 break;
         }
 
-        Log.d("Radio button selected?",String.valueOf(radioButtonSelected));
-        Log.d("Reminder Type", reminderType);
-
     }
 
     public void showTimePicker(View v){
@@ -95,8 +93,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         _day = dayOfMonth;
         _year = year;
 
-        Log.d("dayOfMonth",String.valueOf(dayOfMonth));
-
         setDateTime = setDateTime.withMonthOfYear(_month+1)
                 .withDayOfMonth(_day)
                 .withYear(_year);
@@ -111,28 +107,37 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 .withMinuteOfHour(_minute);
     }
 
-    protected void setReminder(View v){
-        boolean hasPermissions = reminder_service.hasPhonePermissions(getApplicationContext());
+    protected void setFoodReminder(View v){
+        boolean hasPermissions = permissionUtils.hasPhonePermissions(getApplicationContext());
 
         millisecondsWait = date_utility.getWaitTime(setDateTime);
         boolean positiveTime = date_utility.millisecondsPositive(millisecondsWait);
 
+
+
         if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
 
-            Intent serviceIntent = new Intent(this, reminder_service.class);
+            Intent serviceIntent = new Intent(this, food_reminder_service.class);
             serviceIntent.putExtra("reminderType",reminderType);
             serviceIntent.putExtra("millis",millisecondsWait);
-            serviceIntent.putExtra("logType","food");
+            serviceIntent.putExtra("logType",logType);
 
             //need to store reminderType, millisecondsWait, logType in the db
             //because if the app is closed, the service cant call the intent
             //to get the information
 
-            stopService(serviceIntent);
+            myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(dbhandler);
+            foodDatabaseUtils.insertReminderDate(reminderType,logType,millisecondsWait);
+            foodDatabaseUtils.insertLastLogged(logType);
+
+            dbhandler.close();
+
+            //stopService(serviceIntent);
+            Log.d("threads running",String.valueOf(Thread.activeCount()));
+
             startService(serviceIntent);
-
-
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)
