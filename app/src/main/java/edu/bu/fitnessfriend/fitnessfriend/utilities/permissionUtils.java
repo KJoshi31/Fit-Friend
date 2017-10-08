@@ -1,4 +1,4 @@
-package edu.bu.fitnessfriend.fitnessfriend;
+package edu.bu.fitnessfriend.fitnessfriend.utilities;
 
 import android.Manifest;
 import android.app.Activity;

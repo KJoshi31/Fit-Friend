@@ -73,7 +73,7 @@
         </activity>
 
         <service
-            android:name=".permissionUtils"
+            android:name=".utilities.permissionUtils"
             android:enabled="true"
             android:exported="true"/>
 
