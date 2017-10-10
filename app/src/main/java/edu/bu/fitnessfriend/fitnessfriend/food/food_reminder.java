@@ -15,6 +15,8 @@ import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
@@ -42,6 +44,8 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     DateTime setDateTime = new DateTime();
     private String logType = "food";
+
+    ArrayList<Intent> intentList = new ArrayList<>();
 
 
     @Override
@@ -140,18 +144,23 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 notifIntent.putExtra("millis",millisecondsWait);
                 notifIntent.putExtra("logType",logType);
 
-                startService(notifIntent);
 
+                intentList.add(notifIntent);
+                startService(notifIntent);
 
 
             }else{
 
-                Intent smsIntent = new Intent(this, food_reminder_service.class);
+                Intent smsIntent = new Intent(this, food_sms_service.class);
                 smsIntent.putExtra("millis",millisecondsWait);
                 smsIntent.putExtra("logType",logType);
 
+                intentList.add(smsIntent);
                 startService(smsIntent);
             }
+
+
+
 
 
 

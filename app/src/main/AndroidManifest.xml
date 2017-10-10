@@ -80,10 +80,9 @@
             android:exported="true"
             android:enabled="true"/>
 
-        <service android:name=".food.food_reminder_service"
+        <service android:name=".food.food_sms_service"
             android:enabled="true"
             android:exported="true"/>
-        <service android:name=".food.food_notif_service" />
 
     </application>
 

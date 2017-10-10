@@ -6,11 +6,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
@@ -25,6 +28,7 @@ public class food_notif_service extends Service {
     String reminderType = "";
     String logType = "";
     long waitMillis = 0L;
+    static ArrayList<Thread> threadArrayList = new ArrayList<>();
 
     public food_notif_service(){
     }
@@ -48,7 +52,6 @@ public class food_notif_service extends Service {
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 
-        Log.d("Service reminderType",reminderType);
         Log.d("waitMillis",String.valueOf(waitMillis));
 
         Runnable r = new Runnable() {
@@ -70,8 +73,16 @@ public class food_notif_service extends Service {
 
 
 
+
         Thread thread = new Thread(r);
-        thread.start();
+        if(Thread.activeCount()<2){
+            threadArrayList.add(thread);
+            threadArrayList.get(0).start();
+        }else{
+            threadArrayList.clear();
+            threadArrayList.add(thread);
+            threadArrayList.get(0).start();
+        }
 
 
 
