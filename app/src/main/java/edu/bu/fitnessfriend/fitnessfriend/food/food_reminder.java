@@ -118,10 +118,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
 
-            Intent serviceIntent = new Intent(this, food_reminder_service.class);
-            serviceIntent.putExtra("reminderType",reminderType);
-            serviceIntent.putExtra("millis",millisecondsWait);
-            serviceIntent.putExtra("logType",logType);
 
             //need to store reminderType, millisecondsWait, logType in the db
             //because if the app is closed, the service cant call the intent
@@ -137,7 +133,26 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
             //stopService(serviceIntent);
             Log.d("threads running",String.valueOf(Thread.activeCount()));
 
-            startService(serviceIntent);
+            if(reminderType.equals("notification")){
+
+
+                Intent notifIntent = new Intent(this, food_notif_service.class);
+                notifIntent.putExtra("millis",millisecondsWait);
+                notifIntent.putExtra("logType",logType);
+
+                startService(notifIntent);
+
+
+
+            }else{
+
+                Intent smsIntent = new Intent(this, food_reminder_service.class);
+                smsIntent.putExtra("millis",millisecondsWait);
+                smsIntent.putExtra("logType",logType);
+
+                startService(smsIntent);
+            }
+
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)

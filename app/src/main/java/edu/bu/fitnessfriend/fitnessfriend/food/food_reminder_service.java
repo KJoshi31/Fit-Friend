@@ -1,9 +1,13 @@
 package edu.bu.fitnessfriend.fitnessfriend.food;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -11,6 +15,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
@@ -31,6 +36,8 @@ public class food_reminder_service extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
 
+        Log.d("active threads",String.valueOf(Thread.activeCount()));
+
         final int currentId = startId;
 
         if(intent == null){
@@ -38,11 +45,10 @@ public class food_reminder_service extends Service {
             foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(foodHandler);
 
             logType = foodDatabaseUtils.getLogInfo().get(0);
-            reminderType = foodDatabaseUtils.getLogInfo().get(1);
             waitMillis = Long.valueOf(foodDatabaseUtils.getLogInfo().get(2));
+            foodDatabaseUtils.deleteAllReminderType(reminderType);
         }else{
             logType = intent.getStringExtra("logType");
-            reminderType = intent.getStringExtra("reminderType");
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 
@@ -60,19 +66,18 @@ public class food_reminder_service extends Service {
                         e.printStackTrace();
                     }
 
-                    if(reminderType.equals("text message")){
                         Log.d("hitting message","hitting sms");
                         sendSmsMessage(getApplicationContext());
-                    }else{
 
-                    }
                 }
                 stopSelf();
             }
         };
 
+
         Thread thread = new Thread(r);
         thread.start();
+
 
 
         return Service.START_STICKY;
@@ -81,13 +86,14 @@ public class food_reminder_service extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
     }
 
 
     public static void sendSmsMessage(Context c){
         String message = "Friendly reminder from Fitness Friend\n" +
-                    "Please log your foods";
+                    "Please log your food calories";
 
 
         TelephonyManager manager = (TelephonyManager)c.getApplicationContext()
@@ -98,4 +104,5 @@ public class food_reminder_service extends Service {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber,null,message,null,null);
     }
+
 }

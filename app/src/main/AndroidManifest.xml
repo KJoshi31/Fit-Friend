@@ -72,11 +72,9 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".utilities.permissionUtils"
+        <service android:name=".food.food_notif_service"
             android:enabled="true"
             android:exported="true"/>
-
 
         <service android:name=".exercise.exercise_reminder_service"
             android:exported="true"
@@ -85,6 +83,7 @@
         <service android:name=".food.food_reminder_service"
             android:enabled="true"
             android:exported="true"/>
+        <service android:name=".food.food_notif_service" />
 
     </application>
 
