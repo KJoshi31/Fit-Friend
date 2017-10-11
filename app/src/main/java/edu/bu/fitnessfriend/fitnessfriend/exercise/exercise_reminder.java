@@ -45,7 +45,6 @@ public class exercise_reminder extends AppCompatActivity implements
     private long millisecondsWait = new DateTime().getMillis();
 
     DateTime setDateTime = new DateTime();
-    private String logType = "exercise";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,19 +142,19 @@ public class exercise_reminder extends AppCompatActivity implements
             if(reminderType.equals("notification")){
                 serviceDatabaseUtils.insertExerciseNotifReminder(millisecondsWait);
 
-                Intent notificationIntent = new Intent(this, exercise_notif_service.class);
-                notificationIntent.putExtra("millis",millisecondsWait);
+                Intent exNotificationIntent = new Intent(this, exercise_notif_service.class);
+                exNotificationIntent.putExtra("millis",millisecondsWait);
 
-                startService(notificationIntent);
+                startService(exNotificationIntent);
 
 
             }else{
                 serviceDatabaseUtils.insertExerciseSMSReminder(millisecondsWait);
 
-                Intent smsIntent = new Intent(this, exercise_sms_service.class);
-                smsIntent.putExtra("millis",millisecondsWait);
+                Intent smsExIntent = new Intent(this, exercise_sms_service.class);
+                smsExIntent.putExtra("millis",millisecondsWait);
 
-                startService(smsIntent);
+                startService(smsExIntent);
             }
 
 

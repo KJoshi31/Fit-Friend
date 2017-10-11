@@ -136,19 +136,19 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
                 serviceDatabaseUtils.insertFoodNotifReminder(millisecondsWait);
 
-                Intent notificationIntent = new Intent(this, food_notif_service.class);
-                notificationIntent.putExtra("millis",millisecondsWait);
+                Intent foodNotificationIntent = new Intent(this, food_notif_service.class);
+                foodNotificationIntent.putExtra("millis",millisecondsWait);
 
-                startService(notificationIntent);
+                startService(foodNotificationIntent);
 
 
             }else{
                 serviceDatabaseUtils.insertFoodSMSReminder(millisecondsWait);
 
-                Intent smsIntent = new Intent(this, food_sms_service.class);
-                smsIntent.putExtra("millis",millisecondsWait);
+                Intent smsFoodIntent = new Intent(this, food_sms_service.class);
+                smsFoodIntent.putExtra("millis",millisecondsWait);
 
-                startService(smsIntent);
+                startService(smsFoodIntent);
             }
 
 

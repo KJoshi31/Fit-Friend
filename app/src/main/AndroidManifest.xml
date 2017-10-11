@@ -76,13 +76,19 @@
             android:enabled="true"
             android:exported="true"/>
 
+        <service android:name=".food.food_sms_service"
+            android:enabled="true"
+            android:exported="true"/>
+
         <service android:name=".exercise.exercise_sms_service"
             android:exported="true"
             android:enabled="true"/>
 
-        <service android:name=".food.food_sms_service"
+        <service android:name=".food.food_notif_service"
             android:enabled="true"
             android:exported="true"/>
+
+
 
     </application>
 
