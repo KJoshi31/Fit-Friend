@@ -76,7 +76,7 @@
             android:enabled="true"
             android:exported="true"/>
 
-        <service android:name=".exercise.exercise_reminder_service"
+        <service android:name=".exercise.exercise_sms_service"
             android:exported="true"
             android:enabled="true"/>
 

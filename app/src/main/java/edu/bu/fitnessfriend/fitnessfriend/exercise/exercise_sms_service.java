@@ -19,12 +19,12 @@ import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
  * Created by karan on 10/8/2017.
  */
 
-public class exercise_reminder_service extends Service {
+public class exercise_sms_service extends Service {
     String reminderType = "";
     String logType = "";
     long waitMillis = 0L;
 
-    public exercise_reminder_service(){
+    public exercise_sms_service(){
     }
 
 

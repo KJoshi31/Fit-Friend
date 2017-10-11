@@ -1,4 +1,4 @@
-package edu.bu.fitnessfriend.fitnessfriend.food;
+package edu.bu.fitnessfriend.fitnessfriend.exercise;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -6,11 +6,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -20,17 +16,16 @@ import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
 /**
- * Created by karan on 10/9/2017.
+ * Created by karan on 10/10/2017.
  */
 
-public class food_notif_service extends Service {
-
+public class exercise_notif_service extends Service {
     String reminderType = "";
     String logType = "";
     long waitMillis = 0L;
     static ArrayList<Thread> threadArrayList = new ArrayList<>();
 
-    public food_notif_service(){
+    public exercise_notif_service(){
     }
 
 
@@ -68,8 +63,8 @@ public class food_notif_service extends Service {
                 }
 
                 stopSelf();
-                }
-            };
+            }
+        };
 
 
 
@@ -94,8 +89,8 @@ public class food_notif_service extends Service {
 
 
         Notification reminderNotification = new Notification.Builder(this)
-                .setContentTitle("Fitness Friend-Food Reminder")
-                .setContentText("Reminder to log food calories!")
+                .setContentTitle("Fitness Friend-Exercise Reminder")
+                .setContentText("Reminder to log exercise calories!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0,175})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -108,6 +103,4 @@ public class food_notif_service extends Service {
         notificationManager.notify(1,reminderNotification);
 
     }
-
-
 }

@@ -45,9 +45,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     DateTime setDateTime = new DateTime();
     private String logType = "food";
 
-    ArrayList<Intent> intentList = new ArrayList<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,13 +137,11 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
             if(reminderType.equals("notification")){
 
 
-                Intent notifIntent = new Intent(this, food_notif_service.class);
-                notifIntent.putExtra("millis",millisecondsWait);
-                notifIntent.putExtra("logType",logType);
+                Intent notificationIntent = new Intent(this, food_notif_service.class);
+                notificationIntent.putExtra("millis",millisecondsWait);
+                notificationIntent.putExtra("logType",logType);
 
-
-                intentList.add(notifIntent);
-                startService(notifIntent);
+                startService(notificationIntent);
 
 
             }else{
@@ -155,7 +150,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 smsIntent.putExtra("millis",millisecondsWait);
                 smsIntent.putExtra("logType",logType);
 
-                intentList.add(smsIntent);
                 startService(smsIntent);
             }
 
