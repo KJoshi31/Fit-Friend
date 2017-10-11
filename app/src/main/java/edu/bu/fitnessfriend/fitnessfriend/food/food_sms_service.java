@@ -74,6 +74,7 @@ public class food_sms_service extends Service {
 
 
         Thread thread = new Thread(r);
+        thread.setName("food_sms_service");
         thread.start();
 
 

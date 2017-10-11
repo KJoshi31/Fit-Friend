@@ -71,6 +71,7 @@ public class exercise_sms_service extends Service {
         };
 
         Thread thread = new Thread(r);
+        thread.setName("ex_sms_service");
         thread.start();
 
 

@@ -75,6 +75,7 @@ public class food_notif_service extends Service {
 
 
         Thread thread = new Thread(r);
+        thread.setName("food_notif_service");
         thread.start();
 
 

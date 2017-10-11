@@ -70,6 +70,7 @@ public class exercise_notif_service extends Service {
 
 
         Thread thread = new Thread(r);
+        thread.setName("ex_notif_service");
         thread.start();
 
 
