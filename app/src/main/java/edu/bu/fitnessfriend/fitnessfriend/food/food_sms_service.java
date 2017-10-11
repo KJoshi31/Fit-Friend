@@ -46,9 +46,7 @@ public class food_sms_service extends Service {
 
             logType = foodDatabaseUtils.getLogInfo().get(0);
             waitMillis = Long.valueOf(foodDatabaseUtils.getLogInfo().get(2));
-            foodDatabaseUtils.deleteAllReminderType(reminderType);
         }else{
-            logType = intent.getStringExtra("logType");
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 

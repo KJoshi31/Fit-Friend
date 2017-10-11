@@ -37,8 +37,6 @@ public class exercise_sms_service extends Service {
             myDatabaseHandler exercieHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
             exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(exercieHandler);
 
-            logType = exerciseDatabaseUtils.getLogInfo().get(0);
-            reminderType = exerciseDatabaseUtils.getLogInfo().get(1);
             waitMillis = Long.valueOf(exerciseDatabaseUtils.getLogInfo().get(2));
         }else{
             logType = intent.getStringExtra("logType");

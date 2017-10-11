@@ -68,4 +68,70 @@ public class serviceDatabaseUtils {
 
         db.close();
     }
+
+    public String getFoodSMSWait(){
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from "+foodSMSDB.TABLE_FOOD_SMS,null);
+
+        cursor.moveToLast();
+
+        String milliseconds = cursor.getString(cursor.getColumnIndex(foodSMSDB.SMS_WAIT_MILLISECONDS));
+
+        cursor.close();
+
+        return milliseconds;
+    }
+
+    public String getFoodNotifWait(){
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from "+foodNotifDB.TABLE_FOOD_NOTIF,null);
+
+        cursor.moveToLast();
+
+        String milliseconds = cursor.getString(cursor.getColumnIndex(foodNotifDB.NOTIF_WAIT_MILLISECONDS));
+
+        cursor.close();
+
+        return milliseconds;
+    }
+
+    public String getExSMSWait(){
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from "+exerciseSMSDB.TABLE_EX_SMS,null);
+
+        cursor.moveToLast();
+
+        String milliseconds = cursor.getString(cursor.getColumnIndex(exerciseSMSDB.SMS_WAIT_MILLISECONDS));
+
+        cursor.close();
+
+        return milliseconds;
+    }
+
+    public String getExNotifWait(){
+
+        Cursor cursor = null;
+        SQLiteDatabase db = _handler.getReadableDatabase();
+
+        cursor = db.rawQuery("select * from "+exerciseNotifDB.TABLE_EX_NOTIF,null);
+
+        cursor.moveToLast();
+
+        String milliseconds = cursor.getString(cursor.getColumnIndex(exerciseNotifDB.NOTIF_WAIT_MILLISECONDS));
+
+        cursor.close();
+
+        return milliseconds;
+    }
+
+
 }
