@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.permissionUtils;
@@ -125,30 +126,27 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
             //to get the information
 
             myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(dbhandler);
-            foodDatabaseUtils.insertReminderDate(reminderType,logType,millisecondsWait);
-            foodDatabaseUtils.insertLastLogged(logType);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(dbhandler);
 
-            dbhandler.close();
 
             //stopService(serviceIntent);
             Log.d("threads running",String.valueOf(Thread.activeCount()));
 
             if(reminderType.equals("notification")){
 
+                serviceDatabaseUtils.insertFoodNotifReminder(millisecondsWait);
 
                 Intent notificationIntent = new Intent(this, food_notif_service.class);
                 notificationIntent.putExtra("millis",millisecondsWait);
-                notificationIntent.putExtra("logType",logType);
 
                 startService(notificationIntent);
 
 
             }else{
+                serviceDatabaseUtils.insertFoodSMSReminder(millisecondsWait);
 
                 Intent smsIntent = new Intent(this, food_sms_service.class);
                 smsIntent.putExtra("millis",millisecondsWait);
-                smsIntent.putExtra("logType",logType);
 
                 startService(smsIntent);
             }
@@ -162,6 +160,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                     findViewById(R.id.notif_type_food_radio_group));
             radioButtonSelected = false;
             reminderType = "";
+
+            dbhandler.close();
+
 
         }else{
             misc_utility.errorSetReminderSnackbar(v);
