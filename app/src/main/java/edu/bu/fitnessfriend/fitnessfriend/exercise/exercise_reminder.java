@@ -17,7 +17,11 @@ import org.joda.time.DateTime;
 
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
+import edu.bu.fitnessfriend.fitnessfriend.food.food_notif_service;
+import edu.bu.fitnessfriend.fitnessfriend.food.food_sms_service;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.permissionUtils;
@@ -41,7 +45,6 @@ public class exercise_reminder extends AppCompatActivity implements
     private long millisecondsWait = new DateTime().getMillis();
 
     DateTime setDateTime = new DateTime();
-    private String logType = "exercise";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,34 +122,62 @@ public class exercise_reminder extends AppCompatActivity implements
         millisecondsWait = date_utility.getWaitTime(setDateTime);
         boolean positiveTime = date_utility.millisecondsPositive(millisecondsWait);
 
-        if (hasPermissions && positiveTime && radioButtonSelected) {
+
+
+        if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
 
-            Intent serviceIntent = new Intent(this, exercise_reminder_service.class);
-            serviceIntent.putExtra("reminderType", reminderType);
-            serviceIntent.putExtra("millis",millisecondsWait);
-            serviceIntent.putExtra("logType",logType);
 
+            //need to store reminderType, millisecondsWait, logType in the db
+            //because if the app is closed, the service cant call the intent
+            //to get the information
 
             myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(dbhandler);
-            exerciseDatabaseUtils.insertReminderDate(reminderType,"exercise",millisecondsWait);
-            exerciseDatabaseUtils.insertLastLogged(logType);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(dbhandler);
 
-            dbhandler.close();
 
-            startService(serviceIntent);
+            //stopService(serviceIntent);
+            Log.d("threads running",String.valueOf(Thread.activeCount()));
+
+            if(reminderType.equals("notification")){
+                serviceDatabaseUtils.insertExerciseNotifReminder(millisecondsWait);
+
+                Intent exNotificationIntent = new Intent(this, exercise_notif_service.class);
+                exNotificationIntent.putExtra("millis",millisecondsWait);
+
+
+                startService(exNotificationIntent);
+
+
+
+            }else{
+                serviceDatabaseUtils.insertExerciseSMSReminder(millisecondsWait);
+
+                Intent smsExIntent = new Intent(this, exercise_sms_service.class);
+                smsExIntent.putExtra("millis",millisecondsWait);
+
+                startService(smsExIntent);
+
+
+            }
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)
                     findViewById(R.id.notif_type_ex_radio_group));
             radioButtonSelected = false;
             reminderType = "";
-        } else {
+
+            dbhandler.close();
+
+
+        }else{
             misc_utility.errorSetReminderSnackbar(v);
 
         }
 
+
     }
 
 }
+
+

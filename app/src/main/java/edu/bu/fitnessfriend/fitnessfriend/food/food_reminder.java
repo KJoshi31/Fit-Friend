@@ -15,9 +15,12 @@ import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.permissionUtils;
@@ -42,7 +45,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     DateTime setDateTime = new DateTime();
     private String logType = "food";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,32 +120,49 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
 
-            Intent serviceIntent = new Intent(this, food_reminder_service.class);
-            serviceIntent.putExtra("reminderType",reminderType);
-            serviceIntent.putExtra("millis",millisecondsWait);
-            serviceIntent.putExtra("logType",logType);
 
             //need to store reminderType, millisecondsWait, logType in the db
             //because if the app is closed, the service cant call the intent
             //to get the information
 
             myDatabaseHandler dbhandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(dbhandler);
-            foodDatabaseUtils.insertReminderDate(reminderType,logType,millisecondsWait);
-            foodDatabaseUtils.insertLastLogged(logType);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(dbhandler);
 
-            dbhandler.close();
 
             //stopService(serviceIntent);
             Log.d("threads running",String.valueOf(Thread.activeCount()));
 
-            startService(serviceIntent);
+            if(reminderType.equals("notification")){
+
+                serviceDatabaseUtils.insertFoodNotifReminder(millisecondsWait);
+
+                Intent foodNotificationIntent = new Intent(this, food_notif_service.class);
+                foodNotificationIntent.putExtra("millis",millisecondsWait);
+
+                startService(foodNotificationIntent);
+
+
+            }else{
+                serviceDatabaseUtils.insertFoodSMSReminder(millisecondsWait);
+
+                Intent smsFoodIntent = new Intent(this, food_sms_service.class);
+                smsFoodIntent.putExtra("millis",millisecondsWait);
+
+                startService(smsFoodIntent);
+            }
+
+
+
+
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)
                     findViewById(R.id.notif_type_food_radio_group));
             radioButtonSelected = false;
             reminderType = "";
+
+            dbhandler.close();
+
 
         }else{
             misc_utility.errorSetReminderSnackbar(v);

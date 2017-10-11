@@ -44,26 +44,28 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         public static final String DEMOGRAPHIC_ACTIVITY_LVL = "activity_level";
     }
 
-    protected class foodReminderDB{
-        public static final String TABLE_FOOD_REMINDER = "food_reminders";
-        public static final String REMINDER_ID = "id";
-        public static final String LOG_TYPE = "log_type";
-        public static final String REMINDER_TYPE = "reminder_type";
-        public static final String WAIT_MILLISECONDS = "wait_milliseconds";
+    protected class foodSMSDB{
+        public static final String TABLE_FOOD_SMS = "food_sms";
+        public static final String WAIT_ID = "id";
+        public static final String SMS_WAIT_MILLISECONDS = "wait_milliseconds";
     }
 
-    protected class exerciseRemindersDB{
-        public static final String TABLE_EX_REMINDER = "exercise_reminders";
-        public static final String REMINDER_ID = "id";
-        public static final String LOG_TYPE = "log_type";
-        public static final String REMINDER_TYPE = "reminder_type";
-        public static final String WAIT_MILLISECONDS = "wait_milliseconds";
+    protected class foodNotifDB{
+        public static final String TABLE_FOOD_NOTIF = "food_notif";
+        public static final String WAIT_ID = "id";
+        public static final String NOTIF_WAIT_MILLISECONDS = "wait_milliseconds";
     }
 
-    protected class addedRemindersDB{
-        public static final String TABLE_LAST_REMINDERS = "last_added_reminder";
-        public static final String ID = "id";
-        public static final String LOGGED_REMINDER = "logged_reminder";
+    protected class exerciseSMSDB{
+        public static final String TABLE_EX_SMS = "exercise_sms";
+        public static final String WAIT_ID = "id";
+        public static final String SMS_WAIT_MILLISECONDS = "wait_milliseconds";
+    }
+
+    protected class exerciseNotifDB{
+        public static final String TABLE_EX_NOTIF = "exercise_notif";
+        public static final String WAIT_ID = "id";
+        public static final String NOTIF_WAIT_MILLISECONDS = "wait_milliseconds";
     }
 
     public myDatabaseHandler(Context context, String name ,
@@ -94,26 +96,34 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
                 " INTEGER, "+ demographicDB.DEMOGRAPHIC_INCH + " INTEGER, "+ demographicDB.DEMOGRAPHIC_ACTIVITY_LVL+
                 " TEXT "+")";
 
-        String CREATE_FOOD_REMINDERS_TABLE = "CREATE TABLE "+foodReminderDB.TABLE_FOOD_REMINDER+
-                "("+foodReminderDB.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                foodReminderDB.LOG_TYPE + " TEXT, "+foodReminderDB.REMINDER_TYPE + " TEXT, "+
-                foodReminderDB.WAIT_MILLISECONDS + " TEXT " +")";
+        String CREATE_FOOD_SMS_TABLE = "CREATE TABLE "+foodSMSDB.TABLE_FOOD_SMS+
+                "("+foodSMSDB.WAIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                foodSMSDB.SMS_WAIT_MILLISECONDS + " TEXT " +")";
 
-        String CREATE_EX_REMINDERS_TABLE = "CREATE TABLE "+exerciseRemindersDB.TABLE_EX_REMINDER+
-                "("+exerciseRemindersDB.REMINDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                exerciseRemindersDB.LOG_TYPE + " TEXT, "+exerciseRemindersDB.REMINDER_TYPE + " TEXT, "+
-                exerciseRemindersDB.WAIT_MILLISECONDS + " TEXT " +")";
+        String CREATE_FOOD_NOTIF_TABLE = "CREATE TABLE "+foodNotifDB.TABLE_FOOD_NOTIF+
+                "("+foodNotifDB.WAIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                foodNotifDB.NOTIF_WAIT_MILLISECONDS + " TEXT " +")";
 
-        String CREATE_ADDED_REMINDERS_TABLE = "CREATE TABLE " + addedRemindersDB.TABLE_LAST_REMINDERS+
-                "("+addedRemindersDB.ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                addedRemindersDB.LOGGED_REMINDER + " TEXT "+ ")";
+        String CREATE_EX_SMS_TABLE = "CREATE TABLE "+exerciseSMSDB.TABLE_EX_SMS+
+                "("+exerciseSMSDB.WAIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                exerciseSMSDB.SMS_WAIT_MILLISECONDS + " TEXT " +")";
+
+        String CREATE_EX_NOTIF_TABLE = "CREATE TABLE "+exerciseNotifDB.TABLE_EX_NOTIF+
+                "("+exerciseNotifDB.WAIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                exerciseNotifDB.NOTIF_WAIT_MILLISECONDS + " TEXT " +")";
+
+
 
         db.execSQL(CREATE_DEMOGRAPHIC_TABLE);
         db.execSQL(CREATE_FOOD_TABLE);
         db.execSQL(CREATE_EXERCISE_TABLE);
-        db.execSQL(CREATE_FOOD_REMINDERS_TABLE);
-        db.execSQL(CREATE_EX_REMINDERS_TABLE);
-        db.execSQL(CREATE_ADDED_REMINDERS_TABLE);
+
+        db.execSQL(CREATE_FOOD_SMS_TABLE);
+        db.execSQL(CREATE_FOOD_NOTIF_TABLE);
+
+        db.execSQL(CREATE_EX_SMS_TABLE);
+        db.execSQL(CREATE_EX_NOTIF_TABLE);
+
 
     }
 
@@ -122,9 +132,15 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+demographicDB.TABLE_DEMOGRAPH);
         db.execSQL("DROP TABLE IF EXISTS "+foodDB.TABLE_FOOD);
         db.execSQL("DROP TABLE IF EXISTS "+exerciseDB.TABLE_EXERCISE);
-        db.execSQL("DROP TABLE IF EXISTS "+foodReminderDB.TABLE_FOOD_REMINDER);
-        db.execSQL("DROP TABLE IF EXISTS "+exerciseRemindersDB.TABLE_EX_REMINDER);
-        db.execSQL("DROP TABLE IF EXISTS "+addedRemindersDB.TABLE_LAST_REMINDERS);
+
+        db.execSQL("DROP TABLE IF EXISTS "+foodSMSDB.TABLE_FOOD_SMS);
+        db.execSQL("DROP TABLE IF EXISTS "+foodNotifDB.TABLE_FOOD_NOTIF);
+
+        db.execSQL("DROP TABLE IF EXISTS "+exerciseSMSDB.TABLE_EX_SMS);
+        db.execSQL("DROP TABLE IF EXISTS "+exerciseNotifDB.TABLE_EX_NOTIF);
+
+
+
 
         onCreate(db);
     }
