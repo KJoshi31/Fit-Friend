@@ -145,7 +145,9 @@ public class exercise_reminder extends AppCompatActivity implements
                 Intent exNotificationIntent = new Intent(this, exercise_notif_service.class);
                 exNotificationIntent.putExtra("millis",millisecondsWait);
 
+
                 startService(exNotificationIntent);
+
 
 
             }else{
@@ -155,6 +157,8 @@ public class exercise_reminder extends AppCompatActivity implements
                 smsExIntent.putExtra("millis",millisecondsWait);
 
                 startService(smsExIntent);
+
+
             }
 
 

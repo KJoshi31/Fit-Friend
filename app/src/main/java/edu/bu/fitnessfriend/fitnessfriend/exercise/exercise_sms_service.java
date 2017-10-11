@@ -45,7 +45,6 @@ public class exercise_sms_service extends Service {
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 
-        Log.d("Service reminderType",reminderType);
         Log.d("waitMillis",String.valueOf(waitMillis));
 
         Runnable r = new Runnable() {
@@ -59,12 +58,9 @@ public class exercise_sms_service extends Service {
                         e.printStackTrace();
                     }
 
-                    if(reminderType.equals("text message")){
                         Log.d("hitting message","hitting sms");
                         sendSmsMessage(getApplicationContext());
-                    }else{
 
-                    }
                 }
                 stopSelf();
             }
