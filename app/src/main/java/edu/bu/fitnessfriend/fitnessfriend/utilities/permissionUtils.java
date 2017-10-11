@@ -2,32 +2,9 @@ package edu.bu.fitnessfriend.fitnessfriend.utilities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Service;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
-
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
-import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
-import edu.bu.fitnessfriend.fitnessfriend.database.miscDatabaseUtils;
-import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static java.lang.Thread.sleep;

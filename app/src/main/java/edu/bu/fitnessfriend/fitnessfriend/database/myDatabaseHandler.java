@@ -135,7 +135,7 @@ public class myDatabaseHandler extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS "+foodSMSDB.TABLE_FOOD_SMS);
         db.execSQL("DROP TABLE IF EXISTS "+foodNotifDB.TABLE_FOOD_NOTIF);
-        
+
         db.execSQL("DROP TABLE IF EXISTS "+exerciseSMSDB.TABLE_EX_SMS);
         db.execSQL("DROP TABLE IF EXISTS "+exerciseNotifDB.TABLE_EX_NOTIF);
 
