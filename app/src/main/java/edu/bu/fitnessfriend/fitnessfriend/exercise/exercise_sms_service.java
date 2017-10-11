@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 
 /**
  * Created by karan on 10/8/2017.
@@ -34,13 +35,13 @@ public class exercise_sms_service extends Service {
         final int currentId = startId;
 
         if(intent == null){
-            myDatabaseHandler exercieHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            exerciseDatabaseUtils exerciseDatabaseUtils = new exerciseDatabaseUtils(exercieHandler);
+            myDatabaseHandler exerciseHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(exerciseHandler);
 
-            waitMillis = Long.valueOf(exerciseDatabaseUtils.getLogInfo().get(2));
+            waitMillis = Long.valueOf(serviceDatabaseUtils.getExSMSWait());
+            exerciseHandler.close();
         }else{
-            logType = intent.getStringExtra("logType");
-            reminderType = intent.getStringExtra("reminderType");
+
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 
 /**
  * Created by karan on 10/10/2017.
@@ -37,13 +38,12 @@ public class exercise_notif_service extends Service {
         final int currentId = startId;
 
         if(intent == null){
-            myDatabaseHandler foodHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(foodHandler);
+            myDatabaseHandler exerciseHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(exerciseHandler);
 
-            logType = foodDatabaseUtils.getLogInfo().get(0);
-            waitMillis = Long.valueOf(foodDatabaseUtils.getLogInfo().get(2));
+            waitMillis = Long.valueOf(serviceDatabaseUtils.getExNotifWait());
+            exerciseHandler.close();
         }else{
-            logType = intent.getStringExtra("logType");
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
 

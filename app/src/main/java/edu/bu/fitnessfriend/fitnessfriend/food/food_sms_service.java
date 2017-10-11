@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
+import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 
 /**
  * Created by karan on 10/8/2017.
@@ -42,10 +43,10 @@ public class food_sms_service extends Service {
 
         if(intent == null){
             myDatabaseHandler foodHandler = new myDatabaseHandler(getApplicationContext(),null,null,1);
-            foodDatabaseUtils foodDatabaseUtils = new foodDatabaseUtils(foodHandler);
+            serviceDatabaseUtils serviceDatabaseUtils = new serviceDatabaseUtils(foodHandler);
 
-            logType = foodDatabaseUtils.getLogInfo().get(0);
-            waitMillis = Long.valueOf(foodDatabaseUtils.getLogInfo().get(2));
+            waitMillis = Long.valueOf(serviceDatabaseUtils.getFoodSMSWait());
+            foodHandler.close();
         }else{
             waitMillis = Long.valueOf(intent.getLongExtra("millis",0L));
         }
