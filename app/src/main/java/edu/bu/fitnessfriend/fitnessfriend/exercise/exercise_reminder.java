@@ -1,11 +1,19 @@
 package edu.bu.fitnessfriend.fitnessfriend.exercise;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,13 +23,11 @@ import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
 
+import edu.bu.fitnessfriend.fitnessfriend.publishers.ExerciseSMSpublisher;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.R;
-import edu.bu.fitnessfriend.fitnessfriend.database.exerciseDatabaseUtils;
-import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
-import edu.bu.fitnessfriend.fitnessfriend.food.food_notif_service;
-import edu.bu.fitnessfriend.fitnessfriend.food.food_sms_service;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.TimePickerFragment;
 import edu.bu.fitnessfriend.fitnessfriend.utilities.permissionUtils;
@@ -43,6 +49,8 @@ public class exercise_reminder extends AppCompatActivity implements
     private int _minute = -1;
 
     private long millisecondsWait = new DateTime().getMillis();
+
+    private int notifCounter = 50;
 
     DateTime setDateTime = new DateTime();
 
@@ -142,23 +150,12 @@ public class exercise_reminder extends AppCompatActivity implements
             if(reminderType.equals("notification")){
                 serviceDatabaseUtils.insertExerciseNotifReminder(millisecondsWait);
 
-                Intent exNotificationIntent = new Intent(this, exercise_notif_service.class);
-                exNotificationIntent.putExtra("millis",millisecondsWait);
-
-
-                startService(exNotificationIntent);
-
-
+                scheduleNotification(getApplicationContext(),millisecondsWait,notifCounter);
 
             }else{
                 serviceDatabaseUtils.insertExerciseSMSReminder(millisecondsWait);
 
-                Intent smsExIntent = new Intent(this, exercise_sms_service.class);
-                smsExIntent.putExtra("millis",millisecondsWait);
-
-                startService(smsExIntent);
-
-
+                scheduleSmsNotification(getApplicationContext(),millisecondsWait);
             }
 
 
@@ -175,8 +172,85 @@ public class exercise_reminder extends AppCompatActivity implements
 
         }
 
+    }
+
+
+    private void scheduleSmsNotification(Context context, long millisecondsDelay){
+
+        Intent smsSendIntent = new Intent(context,ExerciseSMSpublisher.class);
+
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(context,notifCounter,smsSendIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        long waitTime = SystemClock.elapsedRealtime()+millisecondsDelay;
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, waitTime, pendingIntent);
+    }
+
+    private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
+        Notification smsNotification = getNotification();
+
+        //code below handles notifications with NotificationPublisher
+
+        int notificationID = notificationCounter;
+
+        Log.d("notification ID",String.valueOf(notificationID));
+
+        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+
+        notificationIntent.putExtra("notification",smsNotification);
+        notificationIntent.putExtra("notification_id",notificationID);
+
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(context,notificationID,notificationIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        long waitTime = SystemClock.elapsedRealtime()+millisecondsDelay;
+
+        Log.d("millisecondsDelay",String.valueOf(waitTime));
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, waitTime, pendingIntent);
 
     }
+
+
+    private Notification getNotification(){
+
+        Intent logFoodIntent = new Intent(this, add_exercise.class);
+
+        PendingIntent logFood = PendingIntent.getActivity(this,0,logFoodIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        Notification reminderNotification = new Notification.Builder(this)
+                .setContentTitle("Fitness Friend-Exercise Reminder")
+                .setContentText("Reminder to log exercise calories!")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setVibrate(new long[]{0,175})
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setContentIntent(logFood)
+                .setAutoCancel(true)
+                .build();
+
+        return reminderNotification;
+    }
+
+    public static void sendSmsMessage(Context c){
+        String message = "Friendly reminder from Fitness Friend\n" +
+                "Please log your exercises";
+
+
+        TelephonyManager manager = (TelephonyManager)c.getApplicationContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        String phoneNumber = manager.getLine1Number();
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber,null,message,null,null);
+    }
+
+
 
 }
 
