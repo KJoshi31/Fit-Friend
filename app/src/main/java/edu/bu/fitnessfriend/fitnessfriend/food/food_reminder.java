@@ -26,6 +26,7 @@ import java.util.Random;
 
 import edu.bu.fitnessfriend.fitnessfriend.NotificationPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.R;
+import edu.bu.fitnessfriend.fitnessfriend.SMSPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
@@ -54,7 +55,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     private int notifCounter = 0;
 
     DateTime setDateTime = new DateTime();
-    private String logType = "food";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,26 +147,15 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
                 serviceDatabaseUtils.insertFoodNotifReminder(millisecondsWait);
 
-                Intent foodNotificationIntent = new Intent(this, food_notif_service.class);
-                foodNotificationIntent.putExtra("millis",millisecondsWait);
-
                 scheduleNotification(getApplicationContext(),millisecondsWait,notifCounter);
 
-                //startService(foodNotificationIntent);
-
-
             }else{
+
                 serviceDatabaseUtils.insertFoodSMSReminder(millisecondsWait);
 
-                Intent smsFoodIntent = new Intent(this, food_sms_service.class);
-                smsFoodIntent.putExtra("millis",millisecondsWait);
+                scheduleSmsNotification(getApplicationContext(),millisecondsWait);
 
-                startService(smsFoodIntent);
             }
-
-
-
-
 
 
             button_validation_utility.clearRadioGroup((RadioGroup)
@@ -185,7 +174,21 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     }
 
-    private void scheduleNotification(Context context, long delay,int notificationCounter){
+    private void scheduleSmsNotification(Context context, long millisecondsDelay){
+
+        Intent smsSendIntent = new Intent(context,SMSPublisher.class);
+
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(context,notifCounter,smsSendIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        long waitTime = SystemClock.elapsedRealtime()+millisecondsDelay;
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, waitTime, pendingIntent);
+    }
+
+    private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
         Notification smsNotification = getNotification();
 
         //code below handles notifications with NotificationPublisher
@@ -202,9 +205,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(context,notificationID,notificationIntent,PendingIntent.FLAG_ONE_SHOT);
 
-        long waitTime = SystemClock.elapsedRealtime()+delay;
+        long waitTime = SystemClock.elapsedRealtime()+millisecondsDelay;
 
-        Log.d("wait time delay",String.valueOf(waitTime));
+        Log.d("millisecondsDelay",String.valueOf(waitTime));
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

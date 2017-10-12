@@ -89,6 +89,10 @@
         <receiver
             android:name=".NotificationPublisher"
             android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".SMSPublisher"
+            android:enabled="true"
             android:exported="true"></receiver>
     </application>
 
