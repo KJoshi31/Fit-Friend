@@ -21,13 +21,8 @@ import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import edu.bu.fitnessfriend.fitnessfriend.NotificationPublisher;
+import edu.bu.fitnessfriend.fitnessfriend.utilities.NotificationPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.R;
-import edu.bu.fitnessfriend.fitnessfriend.SMSPublisher;
-import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.fragments.DatePickerFragment;
@@ -176,7 +171,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     private void scheduleSmsNotification(Context context, long millisecondsDelay){
 
-        Intent smsSendIntent = new Intent(context,SMSPublisher.class);
+        Intent smsSendIntent = new Intent(context,FoodSMSpublisher.class);
 
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(context,notifCounter,smsSendIntent,PendingIntent.FLAG_ONE_SHOT);
@@ -185,7 +180,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, waitTime, pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,waitTime , pendingIntent);
     }
 
     private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){

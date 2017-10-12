@@ -87,11 +87,15 @@
             android:exported="true" />
 
         <receiver
-            android:name=".NotificationPublisher"
+            android:name=".utilities.NotificationPublisher"
             android:enabled="true"
             android:exported="true" />
         <receiver
-            android:name=".SMSPublisher"
+            android:name=".food.FoodSMSpublisher"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".exercise.ExerciseSMSpublisher"
             android:enabled="true"
             android:exported="true"></receiver>
     </application>
