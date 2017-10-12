@@ -12,6 +12,8 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -21,7 +23,8 @@ import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
 
-import edu.bu.fitnessfriend.fitnessfriend.utilities.NotificationPublisher;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.ExerciseSMSpublisher;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
@@ -232,6 +235,21 @@ public class exercise_reminder extends AppCompatActivity implements
 
         return reminderNotification;
     }
+
+    public static void sendSmsMessage(Context c){
+        String message = "Friendly reminder from Fitness Friend\n" +
+                "Please log your exercises";
+
+
+        TelephonyManager manager = (TelephonyManager)c.getApplicationContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        String phoneNumber = manager.getLine1Number();
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber,null,message,null,null);
+    }
+
 
 
 }
