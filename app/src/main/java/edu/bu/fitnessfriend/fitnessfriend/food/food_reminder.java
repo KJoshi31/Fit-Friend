@@ -1,9 +1,15 @@
 package edu.bu.fitnessfriend.fitnessfriend.food;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +22,9 @@ import android.widget.TimePicker;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import edu.bu.fitnessfriend.fitnessfriend.NotificationPublisher;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.foodDatabaseUtils;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
@@ -42,6 +50,8 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     private int _minute = -1;
 
     private long millisecondsWait = new DateTime().getMillis();
+
+    private int notifCounter = 0;
 
     DateTime setDateTime = new DateTime();
     private String logType = "food";
@@ -119,6 +129,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
+            notifCounter++;
 
 
             //need to store reminderType, millisecondsWait, logType in the db
@@ -139,7 +150,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 Intent foodNotificationIntent = new Intent(this, food_notif_service.class);
                 foodNotificationIntent.putExtra("millis",millisecondsWait);
 
-                startService(foodNotificationIntent);
+                scheduleNotification(getApplicationContext(),millisecondsWait,notifCounter);
+
+                //startService(foodNotificationIntent);
 
 
             }else{
@@ -170,6 +183,53 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         }
 
 
+    }
+
+    private void scheduleNotification(Context context, long delay,int notificationCounter){
+        Notification smsNotification = getNotification();
+
+        //code below handles notifications with NotificationPublisher
+
+        int notificationID = notificationCounter;
+
+        Log.d("notification ID",String.valueOf(notificationID));
+
+        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+
+        notificationIntent.putExtra("notification",smsNotification);
+        notificationIntent.putExtra("notification_id",notificationID);
+
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(context,notificationID,notificationIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        long waitTime = SystemClock.elapsedRealtime()+delay;
+
+        Log.d("wait time delay",String.valueOf(waitTime));
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, waitTime, pendingIntent);
+
+    }
+
+
+    private Notification getNotification(){
+
+        Intent logFoodIntent = new Intent(this, add_food.class);
+
+        PendingIntent logFood = PendingIntent.getActivity(this,0,logFoodIntent,PendingIntent.FLAG_ONE_SHOT);
+
+        Notification reminderNotification = new Notification.Builder(this)
+                .setContentTitle("Fitness Friend-Food Reminder")
+                .setContentText("Reminder to log food calories!")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setVibrate(new long[]{0,175})
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setContentIntent(logFood)
+                .setAutoCancel(true)
+                .build();
+
+        return reminderNotification;
     }
 
 

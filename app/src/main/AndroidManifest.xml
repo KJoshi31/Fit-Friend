@@ -3,7 +3,7 @@
     package="edu.bu.fitnessfriend.fitnessfriend">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -54,16 +54,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".food.food_reminder" >
+        <activity android:name=".food.food_reminder">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
         <activity android:name=".exercise.exercise_reminder">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -72,24 +69,27 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".food.food_notif_service"
+        <service
+            android:name=".food.food_notif_service"
             android:enabled="true"
-            android:exported="true"/>
-
-        <service android:name=".food.food_sms_service"
+            android:exported="true" />
+        <service
+            android:name=".food.food_sms_service"
             android:enabled="true"
-            android:exported="true"/>
-
-        <service android:name=".exercise.exercise_sms_service"
-            android:exported="true"
-            android:enabled="true"/>
-
-        <service android:name=".food.food_notif_service"
+            android:exported="true" />
+        <service
+            android:name=".exercise.exercise_sms_service"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+        <service
+            android:name=".food.food_notif_service"
+            android:enabled="true"
+            android:exported="true" />
 
-
-
+        <receiver
+            android:name=".NotificationPublisher"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
