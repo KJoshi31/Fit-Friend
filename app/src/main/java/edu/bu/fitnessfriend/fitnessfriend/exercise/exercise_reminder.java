@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -190,11 +191,13 @@ public class exercise_reminder extends AppCompatActivity implements
     }
 
     private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
-        Notification smsNotification = getNotification();
+        int notificationID = notificationCounter;
+
+
 
         //code below handles notifications with NotificationPublisher
+        Notification smsNotification = getNotification(notificationID);
 
-        int notificationID = notificationCounter;
 
         Log.d("notification ID",String.valueOf(notificationID));
 
@@ -217,11 +220,29 @@ public class exercise_reminder extends AppCompatActivity implements
     }
 
 
-    private Notification getNotification(){
+    private Notification getNotification(int notificationID){
 
-        Intent logFoodIntent = new Intent(this, add_exercise.class);
+        Intent logExIntent = new Intent(this, add_exercise.class);
+        Intent viewExHistoryIntent = new Intent(this,exercise_history.class);
 
-        PendingIntent logFood = PendingIntent.getActivity(this,0,logFoodIntent,PendingIntent.FLAG_ONE_SHOT);
+        logExIntent.putExtra("notification_id",notificationID);
+        viewExHistoryIntent.putExtra("notification_id",notificationID);
+
+        PendingIntent logExercisePending = PendingIntent.getActivity(this,0,logExIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent viewExerciseHistoryPending = PendingIntent.getActivity(this,1,viewExHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+
+
+        Notification.Action LogExsNotifButton =
+                new Notification.Action.Builder(
+                        Icon.createWithResource(this,R.mipmap.ic_launcher)
+                        ,"Log Exercise Calories",logExercisePending).build();
+
+        Notification.Action ViewExHistoryButton =
+                new Notification.Action.Builder(
+                        Icon.createWithResource(this,R.mipmap.ic_launcher)
+                        ,"Exercise History",viewExerciseHistoryPending).build();
+
+
 
         Notification reminderNotification = new Notification.Builder(this)
                 .setContentTitle("Fitness Friend-Exercise Reminder")
@@ -229,8 +250,10 @@ public class exercise_reminder extends AppCompatActivity implements
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0,175})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setContentIntent(logFood)
+                .setContentIntent(logExercisePending)
                 .setAutoCancel(true)
+                .addAction(ViewExHistoryButton)
+                .addAction(LogExsNotifButton)
                 .build();
 
         return reminderNotification;

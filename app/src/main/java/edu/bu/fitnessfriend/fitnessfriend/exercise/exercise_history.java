@@ -1,8 +1,10 @@
 package edu.bu.fitnessfriend.fitnessfriend.exercise;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,6 +27,13 @@ public class exercise_history extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_exercise_history);
+
+        if(getIntent()!=null){
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            int notifId = getIntent().getIntExtra("notification_id",0);
+            Log.d("add food notif id",String.valueOf(notifId));
+            notificationManager.cancel(notifId);
+        }
 
         populateList();
     }
