@@ -189,11 +189,12 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     }
 
     private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
-        Notification smsNotification = getNotification();
 
         //code below handles notifications with NotificationPublisher
 
         int notificationID = notificationCounter;
+
+        Notification smsNotification = getNotification(notificationID);
 
         Log.d("notification ID",String.valueOf(notificationID));
 
@@ -216,13 +217,21 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private Notification getNotification(){
+    private Notification getNotification(int notificationID){
 
         Intent logFoodIntent = new Intent(this, add_food.class);
         Intent viewFoodHistoryIntent = new Intent(this,food_history.class);
 
-        PendingIntent logFoodPending = PendingIntent.getActivity(this,0,logFoodIntent,PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent viewFoodPending = PendingIntent.getActivity(this,1,viewFoodHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        Log.d("Notif ID",String.valueOf(notificationID));
+
+        logFoodIntent.putExtra("notification_id",notificationID);
+        viewFoodHistoryIntent.putExtra("notification_id",notificationID);
+
+
+        PendingIntent logFoodPending = PendingIntent
+                .getActivity(this,0,logFoodIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent viewFoodPending = PendingIntent
+                .getActivity(this,1,viewFoodHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification.Action LogFoodsNotifButton =
                 new Notification.Action.Builder(
@@ -233,8 +242,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 new Notification.Action.Builder(
                         Icon.createWithResource(this,R.mipmap.ic_launcher)
                         ,"Food History",viewFoodPending).build();
-
-
 
 
         Notification reminderNotification = new Notification.Builder(this)
@@ -248,6 +255,8 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 .addAction(ViewFoodHistoryButton)
                 .addAction(LogFoodsNotifButton)
                 .build();
+
+        reminderNotification.flags = Notification.FLAG_AUTO_CANCEL;
 
         return reminderNotification;
     }

@@ -1,10 +1,13 @@
 package edu.bu.fitnessfriend.fitnessfriend.food;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,18 @@ public class add_food extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
+
+
+        //notification stuff
+
+        if(getIntent()!=null){
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            int notifId = getIntent().getIntExtra("notification_id",0);
+            Log.d("add food notif id",String.valueOf(notifId));
+            notificationManager.cancel(notifId);
+        }
+
+
 
         Button logFoodButton = (Button) findViewById(R.id.add_food_btn);
         logFoodButton.setEnabled(false);
