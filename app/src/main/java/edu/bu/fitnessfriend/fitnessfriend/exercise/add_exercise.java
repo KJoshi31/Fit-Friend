@@ -1,10 +1,12 @@
 package edu.bu.fitnessfriend.fitnessfriend.exercise;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,13 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
+
+        if(getIntent()!=null){
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            int notifId = getIntent().getIntExtra("notification_id",0);
+            Log.d("add food notif id",String.valueOf(notifId));
+            notificationManager.cancel(notifId);
+        }
 
         Button logExerciseButton = (Button)findViewById(R.id.add_ex_btn);
         logExerciseButton.setEnabled(false);

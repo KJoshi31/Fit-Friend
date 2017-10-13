@@ -8,10 +8,12 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -187,11 +189,12 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     }
 
     private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
-        Notification smsNotification = getNotification();
 
         //code below handles notifications with NotificationPublisher
 
         int notificationID = notificationCounter;
+
+        Notification smsNotification = getNotification(notificationID);
 
         Log.d("notification ID",String.valueOf(notificationID));
 
@@ -214,11 +217,32 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private Notification getNotification(){
+    private Notification getNotification(int notificationID){
 
         Intent logFoodIntent = new Intent(this, add_food.class);
+        Intent viewFoodHistoryIntent = new Intent(this,food_history.class);
 
-        PendingIntent logFood = PendingIntent.getActivity(this,0,logFoodIntent,PendingIntent.FLAG_ONE_SHOT);
+        Log.d("Notif ID",String.valueOf(notificationID));
+
+        logFoodIntent.putExtra("notification_id",notificationID);
+        viewFoodHistoryIntent.putExtra("notification_id",notificationID);
+
+
+        PendingIntent logFoodPending = PendingIntent
+                .getActivity(this,0,logFoodIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent viewFoodPending = PendingIntent
+                .getActivity(this,1,viewFoodHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Notification.Action LogFoodsNotifButton =
+                new Notification.Action.Builder(
+                        Icon.createWithResource(this,R.mipmap.ic_launcher)
+                        ,"Log Food Calories",logFoodPending).build();
+
+        Notification.Action ViewFoodHistoryButton =
+                new Notification.Action.Builder(
+                        Icon.createWithResource(this,R.mipmap.ic_launcher)
+                        ,"Food History",viewFoodPending).build();
+
 
         Notification reminderNotification = new Notification.Builder(this)
                 .setContentTitle("Fitness Friend-Food Reminder")
@@ -226,9 +250,13 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0,175})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setContentIntent(logFood)
+                .setContentIntent(logFoodPending)
                 .setAutoCancel(true)
+                .addAction(ViewFoodHistoryButton)
+                .addAction(LogFoodsNotifButton)
                 .build();
+
+        reminderNotification.flags = Notification.FLAG_AUTO_CANCEL;
 
         return reminderNotification;
     }
