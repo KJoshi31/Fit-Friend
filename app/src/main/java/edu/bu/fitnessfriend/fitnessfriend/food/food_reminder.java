@@ -267,9 +267,10 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
 
         Notification reminderNotification = new Notification.Builder(this)
+                .setSmallIcon(R.mipmap.spoon_fork)
+                .setLargeIcon(Icon.createWithResource(this,R.mipmap.eat))
                 .setContentTitle("Fitness Friend-Food Reminder")
                 .setContentText("Reminder to log food calories!")
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0,175})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(logFoodPending)
