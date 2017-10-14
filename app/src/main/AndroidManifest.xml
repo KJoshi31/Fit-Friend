@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/heart"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/heart"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".setup">
@@ -69,11 +69,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".food.food_notif_service"
-            android:enabled="true"
-            android:exported="true" />
-
         <receiver
             android:name=".publishers.NotificationPublisher"
             android:enabled="true"
@@ -85,7 +80,7 @@
         <receiver
             android:name=".publishers.ExerciseSMSpublisher"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true"/>
     </application>
 
 </manifest>

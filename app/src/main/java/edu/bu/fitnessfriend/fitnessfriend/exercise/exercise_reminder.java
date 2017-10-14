@@ -266,9 +266,10 @@ public class exercise_reminder extends AppCompatActivity implements
 
 
         Notification reminderNotification = new Notification.Builder(this)
+                .setLargeIcon(Icon.createWithResource(this,R.mipmap.exercise))
+                .setSmallIcon(R.mipmap.weight)
                 .setContentTitle("Fitness Friend-Exercise Reminder")
                 .setContentText("Reminder to log exercise calories!")
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0,175})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(logExercisePending)
