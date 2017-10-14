@@ -20,9 +20,12 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import edu.bu.fitnessfriend.fitnessfriend.publishers.ExerciseSMSpublisher;
 import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
@@ -55,6 +58,9 @@ public class exercise_reminder extends AppCompatActivity implements
 
     DateTime setDateTime = new DateTime();
 
+    DateTimeFormatter twelveHourFormat = DateTimeFormat.forPattern("hh:mm aa");
+    DateTimeFormatter dateFormat = DateTimeFormat.forPattern("MMM/dd/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +69,13 @@ public class exercise_reminder extends AppCompatActivity implements
         if(!permissionUtils.hasPhonePermissions(this)){
             permissionUtils.getPhonePermissions(this);
         }
+
+        TextView dateLabel = (TextView) findViewById(R.id.ex_date_lbl);
+        TextView timeLabel = (TextView) findViewById(R.id.ex_time_lbl);
+
+        dateLabel.setText("Date Selected: "+dateFormat.print(setDateTime));
+        timeLabel.setText("Time Selected: "+twelveHourFormat.print(setDateTime));
+
     }
 
 
@@ -114,6 +127,10 @@ public class exercise_reminder extends AppCompatActivity implements
         setDateTime = setDateTime.withMonthOfYear(_month+1)
                 .withDayOfMonth(_day)
                 .withYear(_year);
+
+        TextView dateLabel = (TextView) findViewById(R.id.ex_date_lbl);
+        dateLabel.setText("Date Selected: "+dateFormat.print(setDateTime));
+
     }
 
     @Override
@@ -123,6 +140,10 @@ public class exercise_reminder extends AppCompatActivity implements
 
         setDateTime = setDateTime.withHourOfDay(_hour)
                 .withMinuteOfHour(_minute);
+
+        TextView timeLabel = (TextView) findViewById(R.id.ex_time_lbl);
+        timeLabel.setText("Time Selected: "+twelveHourFormat.print(setDateTime));
+
     }
 
     protected void setExerciseReminder(View v) {
