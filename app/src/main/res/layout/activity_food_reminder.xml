@@ -40,7 +40,7 @@
         android:id="@+id/set_time_food_btn"
         android:layout_width="167dp"
         android:layout_height="48dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="11dp"
         android:onClick="showTimePicker"
         android:text="@string/set_time_btn_lbl"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -48,13 +48,14 @@
         app:layout_constraintTop_toBottomOf="@+id/set_date_food_btn"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.502" />
 
     <TextView
         android:id="@+id/notif_type_food_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="7dp"
         android:text="@string/notif_type_lbl"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/notif_type_food_radio_group"
@@ -62,18 +63,60 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.502" />
+
+    <Button
+        android:id="@+id/set_food_reminder_btn"
+        android:layout_width="212dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="35dp"
+        android:onClick="setFoodReminder"
+        android:text="@string/set_food_reminder_btn_lbl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1" />
+
+    <TextView
+        android:id="@+id/food_date_lbl"
+        android:layout_width="334dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/date_selected"
+        android:textSize="21sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_time_food_btn" />
+
+    <TextView
+        android:id="@+id/food_time_lbl"
+        android:layout_width="329dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="85dp"
+        android:text="@string/time_selected"
+        android:textSize="21sp"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_time_food_btn" />
 
     <RadioGroup
         android:id="@+id/notif_type_food_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="47dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@+id/set_food_reminder_btn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_time_lbl"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -95,49 +138,4 @@
             android:onClick="selectReminder"
             android:text="@string/notification_message_radio_btn_lbl" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/set_food_reminder_btn"
-        android:layout_width="212dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="35dp"
-        android:onClick="setFoodReminder"
-        android:text="@string/set_food_reminder_btn_lbl"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <TextView
-        android:id="@+id/food_date_lbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/date_selected"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_date_food_btn" />
-
-    <TextView
-        android:id="@+id/food_time_lbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="23dp"
-        android:text="@string/time_selected"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_time_food_btn" />
 </android.support.constraint.ConstraintLayout>

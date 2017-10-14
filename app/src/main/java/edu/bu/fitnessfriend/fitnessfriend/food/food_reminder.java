@@ -21,9 +21,12 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import edu.bu.fitnessfriend.fitnessfriend.publishers.FoodSMSpublisher;
 import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
@@ -56,6 +59,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     DateTime setDateTime = new DateTime();
 
+    DateTimeFormatter twelveHourFormat = DateTimeFormat.forPattern("hh:mm aa");
+    DateTimeFormatter dateFormat = DateTimeFormat.forPattern("MMM/dd/yyyy");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,15 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         if(!permissionUtils.hasPhonePermissions(this)){
             permissionUtils.getPhonePermissions(this);
         }
+
+        TextView dateLabel = (TextView)findViewById(R.id.food_date_lbl);
+        TextView timeLabel = (TextView)findViewById(R.id.food_time_lbl);
+
+
+        dateLabel.setText("Date Selected: "+dateFormat.print(setDateTime));
+        timeLabel.setText("Time Selected: "+twelveHourFormat.print(setDateTime));
+
+
     }
 
 
@@ -108,6 +123,10 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
         setDateTime = setDateTime.withMonthOfYear(_month+1)
                 .withDayOfMonth(_day)
                 .withYear(_year);
+
+        TextView dateLabel = (TextView)findViewById(R.id.food_date_lbl);
+        dateLabel.setText("Date Selected: "+dateFormat.print(setDateTime));
+
     }
 
     @Override
@@ -117,6 +136,9 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         setDateTime = setDateTime.withHourOfDay(_hour)
                 .withMinuteOfHour(_minute);
+
+        TextView timeLabel = (TextView)findViewById(R.id.food_time_lbl);
+        timeLabel.setText("Time Selected: "+twelveHourFormat.print(setDateTime));
     }
 
     protected void setFoodReminder(View v){
