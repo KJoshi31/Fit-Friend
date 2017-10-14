@@ -81,6 +81,7 @@ public class serviceDatabaseUtils {
         String milliseconds = cursor.getString(cursor.getColumnIndex(foodSMSDB.SMS_WAIT_MILLISECONDS));
 
         cursor.close();
+        db.close();
 
         return milliseconds;
     }
@@ -97,6 +98,7 @@ public class serviceDatabaseUtils {
         String milliseconds = cursor.getString(cursor.getColumnIndex(foodNotifDB.NOTIF_WAIT_MILLISECONDS));
 
         cursor.close();
+        db.close();
 
         return milliseconds;
     }
@@ -113,6 +115,7 @@ public class serviceDatabaseUtils {
         String milliseconds = cursor.getString(cursor.getColumnIndex(exerciseSMSDB.SMS_WAIT_MILLISECONDS));
 
         cursor.close();
+        db.close();
 
         return milliseconds;
     }
@@ -129,6 +132,7 @@ public class serviceDatabaseUtils {
         String milliseconds = cursor.getString(cursor.getColumnIndex(exerciseNotifDB.NOTIF_WAIT_MILLISECONDS));
 
         cursor.close();
+        db.close();
 
         return milliseconds;
     }

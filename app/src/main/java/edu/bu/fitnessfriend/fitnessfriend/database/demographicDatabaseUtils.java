@@ -52,6 +52,7 @@ public class demographicDatabaseUtils {
         userName = cursor.getString( cursor.getColumnIndex("name")).trim();
 
         cursor.close();
+        db.close();
 
         return userName;
     }
