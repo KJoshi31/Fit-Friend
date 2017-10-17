@@ -13,7 +13,6 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -28,8 +27,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import edu.bu.fitnessfriend.fitnessfriend.publishers.FoodSMSpublisher;
-import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.FoodSMSsender;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationSender;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
@@ -198,7 +197,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     private void scheduleSmsNotification(Context context, long millisecondsDelay){
 
-        Intent smsSendIntent = new Intent(context,FoodSMSpublisher.class);
+        Intent smsSendIntent = new Intent(context,FoodSMSsender.class);
 
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(context,notifCounter,smsSendIntent,PendingIntent.FLAG_ONE_SHOT);
@@ -212,7 +211,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
     private void scheduleNotification(Context context, long millisecondsDelay,int notificationCounter){
 
-        //code below handles notifications with NotificationPublisher
+        //code below handles notifications with NotificationSender
 
         int notificationID = notificationCounter;
 
@@ -220,7 +219,7 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
         Log.d("notification ID",String.valueOf(notificationID));
 
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+        Intent notificationIntent = new Intent(context, NotificationSender.class);
 
         notificationIntent.putExtra("notification",smsNotification);
         notificationIntent.putExtra("notification_id",notificationID);
@@ -251,9 +250,13 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
 
 
         PendingIntent logFoodPending = PendingIntent
-                .getActivity(this,0,logFoodIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+                .getActivity(this,0,logFoodIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
         PendingIntent viewFoodPending = PendingIntent
-                .getActivity(this,1,viewFoodHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+                .getActivity(this,1,viewFoodHistoryIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         Notification.Action LogFoodsNotifButton =
                 new Notification.Action.Builder(
@@ -278,8 +281,6 @@ public class food_reminder extends AppCompatActivity implements DatePickerDialog
                 .addAction(ViewFoodHistoryButton)
                 .addAction(LogFoodsNotifButton)
                 .build();
-
-        reminderNotification.flags = Notification.FLAG_AUTO_CANCEL;
 
         return reminderNotification;
     }

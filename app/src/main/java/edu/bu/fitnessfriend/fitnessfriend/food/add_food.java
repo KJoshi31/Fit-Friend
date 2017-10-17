@@ -36,9 +36,9 @@ public class add_food extends AppCompatActivity{
 
 
         //notification stuff
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         if(getIntent()!=null){
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             int notifId = getIntent().getIntExtra("notification_id",0);
             Log.d("add food notif id",String.valueOf(notifId));
             notificationManager.cancel(notifId);
