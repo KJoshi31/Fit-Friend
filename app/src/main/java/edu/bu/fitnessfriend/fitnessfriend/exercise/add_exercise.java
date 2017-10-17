@@ -37,8 +37,9 @@ public class add_exercise extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
 
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         if(getIntent()!=null){
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             int notifId = getIntent().getIntExtra("notification_id",0);
             Log.d("add food notif id",String.valueOf(notifId));
             notificationManager.cancel(notifId);

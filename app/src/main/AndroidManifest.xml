@@ -73,15 +73,15 @@
         </activity>
 
         <receiver
-            android:name=".publishers.NotificationPublisher"
+            android:name=".publishers.NotificationSender"
             android:enabled="true"
             android:exported="true" />
         <receiver
-            android:name=".publishers.FoodSMSpublisher"
+            android:name=".publishers.FoodSMSsender"
             android:enabled="true"
             android:exported="true" />
         <receiver
-            android:name=".publishers.ExerciseSMSpublisher"
+            android:name=".publishers.ExerciseSMSsender"
             android:enabled="true"
             android:exported="true"/>
     </application>

@@ -27,8 +27,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import edu.bu.fitnessfriend.fitnessfriend.publishers.ExerciseSMSpublisher;
-import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationPublisher;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.ExerciseSMSsender;
+import edu.bu.fitnessfriend.fitnessfriend.publishers.NotificationSender;
 import edu.bu.fitnessfriend.fitnessfriend.R;
 import edu.bu.fitnessfriend.fitnessfriend.database.myDatabaseHandler;
 import edu.bu.fitnessfriend.fitnessfriend.database.serviceDatabaseUtils;
@@ -156,7 +156,7 @@ public class exercise_reminder extends AppCompatActivity implements
 
         if(hasPermissions && positiveTime && radioButtonSelected){
             misc_utility.successSetReminderSnackbar(v);
-
+            notifCounter++;
 
             //need to store reminderType, millisecondsWait, logType in the db
             //because if the app is closed, the service cant call the intent
@@ -199,7 +199,7 @@ public class exercise_reminder extends AppCompatActivity implements
 
     private void scheduleSmsNotification(Context context, long millisecondsDelay){
 
-        Intent smsSendIntent = new Intent(context,ExerciseSMSpublisher.class);
+        Intent smsSendIntent = new Intent(context,ExerciseSMSsender.class);
 
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(context,notifCounter,smsSendIntent,PendingIntent.FLAG_ONE_SHOT);
@@ -216,13 +216,13 @@ public class exercise_reminder extends AppCompatActivity implements
 
 
 
-        //code below handles notifications with NotificationPublisher
+        //code below handles notifications with NotificationSender
         Notification smsNotification = getNotification(notificationID);
 
 
         Log.d("notification ID",String.valueOf(notificationID));
 
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+        Intent notificationIntent = new Intent(context, NotificationSender.class);
 
         notificationIntent.putExtra("notification",smsNotification);
         notificationIntent.putExtra("notification_id",notificationID);
@@ -249,8 +249,11 @@ public class exercise_reminder extends AppCompatActivity implements
         logExIntent.putExtra("notification_id",notificationID);
         viewExHistoryIntent.putExtra("notification_id",notificationID);
 
-        PendingIntent logExercisePending = PendingIntent.getActivity(this,0,logExIntent,PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent viewExerciseHistoryPending = PendingIntent.getActivity(this,1,viewExHistoryIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent logExercisePending = PendingIntent
+                .getActivity(this,2,logExIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        PendingIntent viewExerciseHistoryPending = PendingIntent
+                .getActivity(this,3,viewExHistoryIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         Notification.Action LogExsNotifButton =
