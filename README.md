@@ -11,3 +11,9 @@ Main functionalities:
 
 Detailed presentation of the app (youtube):
 https://www.youtube.com/watch?v=HffDhnGEcc8
+
+Technologies Used:
+- Android Studio
+- Java
+- SQLite3
+
